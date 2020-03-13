@@ -1,0 +1,74 @@
+@import '../../scss/globals';
+@import '../../scss/mixins';
+
+.nav {
+  width: 100%;
+}
+
+.nav__inner {
+  width: 90%;
+  margin: 0 auto;
+  padding: 40px 0;
+
+  display: flex;
+  justify-content: space-between;
+
+  @include m-mobile {
+    width: 100%;
+    padding: 20px 0;
+    flex-direction: column;
+  }
+}
+
+.nav__section--logo {
+  justify-content: flex-start;
+}
+
+.nav__section--menu {
+  justify-content: center;
+}
+
+.nav__section--switch {
+  justify-content: flex-end;
+}
+
+.nav__section {
+  flex: 1;
+  display: flex;
+
+  @include m-mobile {
+    justify-content: center;
+
+    & + & {
+      margin-top: 10px;
+    }
+  }
+}
+
+.nav__logo {
+  font-size: 22px;
+  color: $dark;
+  letter-spacing: -1px;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.nav__menu__item {
+  font-size: 18px;
+  color: $gray;
+
+  & + & {
+    margin-left: 10px;
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: #333;
+  }
+}
+
+.nav__menu__item--active {
+  color: $dark;
+}

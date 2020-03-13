@@ -1,0 +1,22 @@
+$dark: #333;
+$gray: #bbb;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: $dark;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+body {
+  color: $dark;
+  font-size: 16px;
+}
