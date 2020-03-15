@@ -1,13 +1,13 @@
 import React from 'react';
+import ColorsContainer from './containers/ColorsContainer';
 import Nav from './components/nav';
-import Colors from './components/colors';
 
 function App() {
   return (
     <div className="App">
       <Nav />
       <main>
-        <Colors />
+        <ColorsContainer />
       </main>
     </div>
   );

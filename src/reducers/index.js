@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux';
-import testReducer from './testReducer';
+import ColorsReducer from './ColorsReducer';
 
-export default combineReducers({ test: testReducer });
+export default combineReducers({ colors: ColorsReducer });
