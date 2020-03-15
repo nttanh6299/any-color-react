@@ -6,12 +6,22 @@ import './colors.scss';
 const propTypes = {
   color: PropTypes.string,
   loading: PropTypes.bool.isRequired,
+  isCopied: PropTypes.bool.isRequired,
   onGenerate: PropTypes.func.isRequired,
   prevColor: PropTypes.func.isRequired,
-  nextColor: PropTypes.func.isRequired
+  nextColor: PropTypes.func.isRequired,
+  copyToClipboard: PropTypes.func.isRequired
 };
 
-const Colors = ({ color, loading, onGenerate, prevColor, nextColor }) => {
+const Colors = ({
+  color,
+  loading,
+  isCopied,
+  onGenerate,
+  prevColor,
+  nextColor,
+  copyToClipboard
+}) => {
   useEffect(() => {
     onGenerate();
   }, []);
@@ -23,7 +33,11 @@ const Colors = ({ color, loading, onGenerate, prevColor, nextColor }) => {
           className="colors__background"
           style={{ backgroundColor: loading ? '#000' : color }}
         >
-          {color && <div className="colors__background__copy">Copy</div>}
+          {color && (
+            <div onClick={copyToClipboard} className="colors__background__copy">
+              {isCopied ? 'Copied' : 'Copy'}
+            </div>
+          )}
         </div>
         <div className="colors__value">{color}</div>
         <div className="colors__actions">

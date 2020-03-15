@@ -4,6 +4,7 @@ export const getColors = state => state.colors;
 
 export const colorsSelector = createSelector(getColors, colors => ({
   loading: colors.loading,
+  isCopied: colors.isCopied,
   color: colors.list[colors.currentIndex]
 }));
 

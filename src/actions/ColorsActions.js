@@ -1,9 +1,10 @@
 import {
   GENERATE_COLOR_REQUEST,
   GENERATE_COLOR_SUCCESS,
-  CHANGE_COLOR
+  CHANGE_COLOR,
+  COPY_COLOR_TO_CLIPBOARD
 } from '../constants/ActionTypes';
-import { getRandomColor } from '../utils';
+import { getRandomColor, copyTextToClipboard } from '../utils';
 import {
   getColors,
   getPrevColorIndex,
@@ -15,6 +16,11 @@ const generateColorRequest = () => ({ type: GENERATE_COLOR_REQUEST });
 const generateColorSuccess = color => ({ type: GENERATE_COLOR_SUCCESS, color });
 
 const changeColorIndex = index => ({ type: CHANGE_COLOR, index });
+
+const copyColorToClipboard = successful => ({
+  type: COPY_COLOR_TO_CLIPBOARD,
+  successful
+});
 
 export const onGenerate = () => async (dispatch, getState) => {
   const state = getState();
@@ -39,5 +45,17 @@ export const nextColor = () => (dispatch, getState) => {
   const nextIndex = getNextColorIndex(state);
   if (nextIndex !== -1) {
     dispatch(changeColorIndex(nextIndex));
+  }
+};
+
+export const copyToClipboard = () => async (dispatch, getState) => {
+  const state = getState();
+  const colors = getColors(state);
+  const hasItems = colors.list.length > 0;
+  const currentIndex = colors.currentIndex;
+
+  if (hasItems && currentIndex >= 0) {
+    const successful = await copyTextToClipboard(colors.list[currentIndex]);
+    dispatch(copyColorToClipboard(successful));
   }
 };
