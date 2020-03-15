@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Background from '../background';
 
 import './colors.scss';
 
 const propTypes = {
   color: PropTypes.string,
-  loading: PropTypes.bool.isRequired,
   isCopied: PropTypes.bool.isRequired,
   onGenerate: PropTypes.func.isRequired,
   prevColor: PropTypes.func.isRequired,
@@ -15,7 +15,6 @@ const propTypes = {
 
 const Colors = ({
   color,
-  loading,
   isCopied,
   onGenerate,
   prevColor,
@@ -29,29 +28,24 @@ const Colors = ({
   return (
     <div className="colors">
       <div className="colors__inner">
-        <div
-          className="colors__background"
-          style={{ backgroundColor: loading ? '#000' : color }}
-        >
-          {color && (
-            <div onClick={copyToClipboard} className="colors__background__copy">
-              {isCopied ? 'Copied' : 'Copy'}
-            </div>
-          )}
-        </div>
+        <Background
+          color={color}
+          copyToClipboard={copyToClipboard}
+          isCopied={isCopied}
+        />
         <div className="colors__value">{color}</div>
         <div className="colors__actions">
           <button
             onClick={onGenerate}
             className="colors__action colors__action--generate"
           >
-            Generate
+            <i className="icon material-icons">refresh</i> Generate
           </button>
           <button onClick={prevColor} className="colors__action">
-            Back
+            <i className="icon material-icons">arrow_left</i> Back
           </button>
           <button onClick={nextColor} className="colors__action">
-            Next
+            Next <i className="icon material-icons">arrow_right</i>
           </button>
         </div>
       </div>
