@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './background.scss';
-
 const propTypes = {
   copyToClipboard: PropTypes.func.isRequired,
   isCopied: PropTypes.bool.isRequired,

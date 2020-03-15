@@ -18,6 +18,12 @@ a {
   }
 }
 
+button,
+input,
+textarea {
+  color: $dark;
+}
+
 body {
   color: $dark;
   font-size: 16px;

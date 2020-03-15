@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Background from '../background';
-
-import './colors.scss';
+import Background from './background';
 
 const propTypes = {
   color: PropTypes.string,
