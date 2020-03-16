@@ -1,6 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { HEADER_LINKS } from '../constants/GlobalConstants';
+
+const HeaderLink = ({ to, label, exact }) => (
+  <Route
+    path={to}
+    exact={exact}
+    children={({ match }) => {
+      return match ? (
+        <span className="nav__item nav__item--active">{label}</span>
+      ) : (
+        <Link to={to} className={`nav__item`}>
+          {label}
+        </Link>
+      );
+    }}
+  />
+);
 
 const Nav = () => {
   return (
@@ -8,21 +24,15 @@ const Nav = () => {
       <nav className="nav">
         <div className="nav__inner">
           <section className="nav__section nav__section--logo">
-            <Link to={HEADER_LINKS.main} className="nav__logo">
+            <Link to="./" className="nav__logo">
               AnyColorReact
             </Link>
           </section>
           <section className="nav__section nav__section--menu">
             <div className="nav__menu">
-              <Link
-                to={HEADER_LINKS.colors}
-                className="nav__menu__item nav__menu__item--active"
-              >
-                Colors
-              </Link>
-              <Link to={HEADER_LINKS.gradients} className="nav__menu__item">
-                Gradients
-              </Link>
+              {HEADER_LINKS.map(link => (
+                <HeaderLink key={link.key} {...link} />
+              ))}
             </div>
           </section>
           <section className="nav__section nav__section--switch">
