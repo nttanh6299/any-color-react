@@ -5,6 +5,10 @@ import {
   COPY_GRADIENT_TO_CLIPBOARD
 } from '../constants/ActionTypes';
 import { getRandomColor } from '../utils';
+import {
+  getPrevGradientIndex,
+  getNextGradientIndex
+} from '../selectors/GradientsSelectors';
 
 const generateGradientRequest = () => ({ type: GENERATE_GRADIENT_REQUEST });
 
@@ -21,7 +25,7 @@ const copyGradientToClipboard = successful => ({
   successful
 });
 
-export const onGenerateGradient = () => async (dispatch, getState) => {
+export const onGenerateGradient = () => async dispatch => {
   dispatch(generateGradientRequest());
   Promise.all([getRandomColor(), getRandomColor()])
     .then(values => {
@@ -29,4 +33,20 @@ export const onGenerateGradient = () => async (dispatch, getState) => {
       dispatch(generateGradientSuccess(values, deg));
     })
     .catch(err => console.log(err));
+};
+
+export const prevGradient = () => (dispatch, getState) => {
+  const state = getState();
+  const prevIndex = getPrevGradientIndex(state);
+  if (prevIndex !== -1) {
+    dispatch(changeGradientIndex(prevIndex));
+  }
+};
+
+export const nextGradient = () => (dispatch, getState) => {
+  const state = getState();
+  const nextIndex = getNextGradientIndex(state);
+  if (nextIndex !== -1) {
+    dispatch(changeGradientIndex(nextIndex));
+  }
 };

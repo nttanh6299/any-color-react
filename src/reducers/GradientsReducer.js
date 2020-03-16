@@ -1,6 +1,7 @@
 import {
   GENERATE_GRADIENT_REQUEST,
-  GENERATE_GRADIENT_SUCCESS
+  GENERATE_GRADIENT_SUCCESS,
+  CHANGE_GRADIENT
 } from '../constants/ActionTypes';
 
 const initialState = {
@@ -37,6 +38,12 @@ export default function(state = initialState, action) {
         isCopied: false,
         currentIndex: state.list.length,
         list: [...state.list, gradient({}, action)]
+      };
+    case CHANGE_GRADIENT:
+      return {
+        ...state,
+        currentIndex: action.index,
+        isCopied: false
       };
     default:
       return state;
