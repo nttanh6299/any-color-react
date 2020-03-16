@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Background from './background';
 import Button from './button';
-import { setGradient } from '../utils/setGradient';
+import { setGradient } from '../utils';
 
 const propTypes = {
   gradient: PropTypes.shape({
