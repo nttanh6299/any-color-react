@@ -13,7 +13,10 @@ import {
 
 const generateColorRequest = () => ({ type: GENERATE_COLOR_REQUEST });
 
-const generateColorSuccess = color => ({ type: GENERATE_COLOR_SUCCESS, color });
+const generateColorSuccess = color => ({
+  type: GENERATE_COLOR_SUCCESS,
+  color
+});
 
 const changeColorIndex = index => ({ type: CHANGE_COLOR, index });
 
@@ -22,7 +25,7 @@ const copyColorToClipboard = successful => ({
   successful
 });
 
-export const onGenerate = () => async (dispatch, getState) => {
+export const onGenerateColor = () => async (dispatch, getState) => {
   const state = getState();
   const colors = getColors(state);
   if (!colors.loading) {

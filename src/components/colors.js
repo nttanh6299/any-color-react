@@ -6,7 +6,7 @@ import Button from './button';
 const propTypes = {
   color: PropTypes.string,
   isCopied: PropTypes.bool.isRequired,
-  onGenerate: PropTypes.func.isRequired,
+  onGenerateColor: PropTypes.func.isRequired,
   prevColor: PropTypes.func.isRequired,
   nextColor: PropTypes.func.isRequired,
   copyToClipboard: PropTypes.func.isRequired
@@ -15,13 +15,13 @@ const propTypes = {
 const Colors = ({
   color,
   isCopied,
-  onGenerate,
+  onGenerateColor,
   prevColor,
   nextColor,
   copyToClipboard
 }) => {
   useEffect(() => {
-    onGenerate();
+    onGenerateColor();
   }, []);
 
   return (
@@ -35,7 +35,7 @@ const Colors = ({
         <div className="colors__value">{color}</div>
         <div className="colors__actions">
           <Button
-            onClick={onGenerate}
+            onClick={onGenerateColor}
             className="colors__action colors__action--generate"
             prefix={<i className="icon material-icons">refresh</i>}
           >
