@@ -11,7 +11,7 @@ const Background = ({ color, copyToClipboard, isCopied }) => {
   const text = isCopied ? ['done', 'Copied!'] : ['code', 'Copy'];
   return (
     <div
-      style={{ backgroundColor: color }}
+      style={{ background: color }}
       onClick={copyToClipboard}
       className="background"
     >
