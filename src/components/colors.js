@@ -9,7 +9,8 @@ const propTypes = {
   onGenerateColor: PropTypes.func.isRequired,
   prevColor: PropTypes.func.isRequired,
   nextColor: PropTypes.func.isRequired,
-  copyToClipboard: PropTypes.func.isRequired
+  copyToClipboard: PropTypes.func.isRequired,
+  generateColorIfNeeded: PropTypes.func.isRequired
 };
 
 const Colors = ({
@@ -18,10 +19,11 @@ const Colors = ({
   onGenerateColor,
   prevColor,
   nextColor,
-  copyToClipboard
+  copyToClipboard,
+  generateColorIfNeeded
 }) => {
   useEffect(() => {
-    onGenerateColor();
+    generateColorIfNeeded();
   }, []);
 
   return (

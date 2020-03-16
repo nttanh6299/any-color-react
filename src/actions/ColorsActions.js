@@ -26,12 +26,12 @@ const copyColorToClipboard = successful => ({
 });
 
 export const onGenerateColor = () => async (dispatch, getState) => {
-  const state = getState();
-  const colors = getColors(state);
-  if (!colors.loading) {
+  try {
     dispatch(generateColorRequest());
     const color = await getRandomColor();
     dispatch(generateColorSuccess(color));
+  } catch (err) {
+    console.log('generate color error:', err);
   }
 };
 
@@ -60,5 +60,13 @@ export const copyToClipboard = () => async (dispatch, getState) => {
   if (hasItems && currentIndex >= 0) {
     const successful = await copyTextToClipboard(colors.list[currentIndex]);
     dispatch(copyColorToClipboard(successful));
+  }
+};
+
+export const generateColorIfNeeded = () => async (dispatch, getState) => {
+  const state = getState();
+  const colors = getColors(state);
+  if (colors.list.length === 0) {
+    dispatch(onGenerateColor());
   }
 };
