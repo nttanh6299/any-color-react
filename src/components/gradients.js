@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Background from './background';
 import Button from './button';
+import { setGradient } from '../utils/setGradient';
 
 const propTypes = {
   gradient: PropTypes.shape({
@@ -11,7 +12,8 @@ const propTypes = {
   isCopied: PropTypes.bool.isRequired,
   onGenerateGradient: PropTypes.func.isRequired,
   prevGradient: PropTypes.func.isRequired,
-  nextGradient: PropTypes.func.isRequired
+  nextGradient: PropTypes.func.isRequired,
+  generateGradientIfNeeded: PropTypes.func.isRequired
 };
 
 const Gradients = ({
@@ -19,25 +21,17 @@ const Gradients = ({
   isCopied,
   onGenerateGradient,
   prevGradient,
-  nextGradient
+  nextGradient,
+  generateGradientIfNeeded
 }) => {
   useEffect(() => {
-    onGenerateGradient();
+    generateGradientIfNeeded();
   }, []);
-
-  const setGradient = (colors = [], deg = 0) => {
-    return `linear-gradient(${deg}deg, ${colors})`;
-  };
-
-  if (!gradient) return null;
 
   return (
     <div className="gradients">
       <div className="inner">
-        <Background
-          color={setGradient(gradient.colors, gradient.deg)}
-          isCopied={isCopied}
-        />
+        <Background color={setGradient(gradient)} isCopied={isCopied} />
         <div className="colors__value">sadasdas</div>
         <div className="colors__actions">
           <Button

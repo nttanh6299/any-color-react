@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { onGenerateGradient, prevGradient, nextGradient } from '../actions';
+import {
+  onGenerateGradient,
+  prevGradient,
+  nextGradient,
+  generateGradientIfNeeded
+} from '../actions';
 import Gradients from '../components/gradients';
 import { gradientsSelector } from '../selectors/GradientsSelectors';
 
@@ -13,5 +18,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   onGenerateGradient,
   prevGradient,
-  nextGradient
+  nextGradient,
+  generateGradientIfNeeded
 })(GradientsContainer);

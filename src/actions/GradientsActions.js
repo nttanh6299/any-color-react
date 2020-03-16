@@ -7,7 +7,8 @@ import {
 import { getRandomColor } from '../utils';
 import {
   getPrevGradientIndex,
-  getNextGradientIndex
+  getNextGradientIndex,
+  getGradients
 } from '../selectors/GradientsSelectors';
 
 const generateGradientRequest = () => ({ type: GENERATE_GRADIENT_REQUEST });
@@ -48,5 +49,13 @@ export const nextGradient = () => (dispatch, getState) => {
   const nextIndex = getNextGradientIndex(state);
   if (nextIndex !== -1) {
     dispatch(changeGradientIndex(nextIndex));
+  }
+};
+
+export const generateGradientIfNeeded = () => async (dispatch, getState) => {
+  const state = getState();
+  const colors = getGradients(state);
+  if (colors.list.length === 0) {
+    dispatch(onGenerateGradient());
   }
 };
