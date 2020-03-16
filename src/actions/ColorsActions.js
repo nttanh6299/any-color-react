@@ -20,7 +20,7 @@ const generateColorSuccess = color => ({
 
 const changeColorIndex = index => ({ type: CHANGE_COLOR, index });
 
-const copyColorToClipboard = successful => ({
+const copyToClipboard = successful => ({
   type: COPY_COLOR_TO_CLIPBOARD,
   successful
 });
@@ -51,7 +51,7 @@ export const nextColor = () => (dispatch, getState) => {
   }
 };
 
-export const copyToClipboard = () => async (dispatch, getState) => {
+export const copyColorToClipboard = () => async (dispatch, getState) => {
   const state = getState();
   const colors = getColors(state);
   const hasItems = colors.list.length > 0;
@@ -59,7 +59,7 @@ export const copyToClipboard = () => async (dispatch, getState) => {
 
   if (hasItems && currentIndex >= 0) {
     const successful = await copyTextToClipboard(colors.list[currentIndex]);
-    dispatch(copyColorToClipboard(successful));
+    dispatch(copyToClipboard(successful));
   }
 };
 

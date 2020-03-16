@@ -5,7 +5,7 @@ import {
   onGenerateColor,
   prevColor,
   nextColor,
-  copyToClipboard,
+  copyColorToClipboard,
   generateColorIfNeeded
 } from '../actions';
 import { colorsSelector } from '../selectors/ColorsSelectors';
@@ -20,6 +20,6 @@ export default connect(mapStateToProps, {
   onGenerateColor,
   prevColor,
   nextColor,
-  copyToClipboard,
+  copyColorToClipboard,
   generateColorIfNeeded
 })(ColorsContainer);

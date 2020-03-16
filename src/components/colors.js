@@ -9,7 +9,7 @@ const propTypes = {
   onGenerateColor: PropTypes.func.isRequired,
   prevColor: PropTypes.func.isRequired,
   nextColor: PropTypes.func.isRequired,
-  copyToClipboard: PropTypes.func.isRequired,
+  copyColorToClipboard: PropTypes.func.isRequired,
   generateColorIfNeeded: PropTypes.func.isRequired
 };
 
@@ -19,7 +19,7 @@ const Colors = ({
   onGenerateColor,
   prevColor,
   nextColor,
-  copyToClipboard,
+  copyColorToClipboard,
   generateColorIfNeeded
 }) => {
   useEffect(() => {
@@ -31,7 +31,7 @@ const Colors = ({
       <div className="inner">
         <Background
           color={color}
-          copyToClipboard={copyToClipboard}
+          copyToClipboard={copyColorToClipboard}
           isCopied={isCopied}
         />
         <div className="colors__value">{color}</div>
