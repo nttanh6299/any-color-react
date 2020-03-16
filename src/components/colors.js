@@ -26,7 +26,7 @@ const Colors = ({
 
   return (
     <div className="colors">
-      <div className="colors__inner">
+      <div className="inner">
         <Background
           color={color}
           copyToClipboard={copyToClipboard}

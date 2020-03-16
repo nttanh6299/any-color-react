@@ -17,7 +17,7 @@ const PublicLayout = ({ children }) => (
   <>
     <Nav />
     <Suspense fallback={<div></div>}>
-      <main>{children}</main>
+      <main className="container">{children}</main>
     </Suspense>
   </>
 );

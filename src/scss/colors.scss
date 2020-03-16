@@ -1,29 +1,11 @@
-.colors {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.colors__inner {
-  width: 400px;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .colors__value {
   width: 100%;
   margin: 8px 0 16px 0;
   text-transform: uppercase;
-  font-weight: 600;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .colors__actions {
-  max-width: 400px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -33,25 +15,9 @@
 
 .colors__action {
   flex: 0 0 49%;
-  font-size: 14px;
-  display: flex;
   justify-content: center;
-  align-items: center;
   border-radius: 16px;
   margin-bottom: 8px;
-  border: none;
-  outline: none;
-  padding: 8px 0;
-  cursor: pointer;
-  transition: background-color 0.2s linear;
-
-  &:hover {
-    background-color: $gray;
-  }
-
-  &:active {
-    transform: translate(0.5px, 0.5px);
-  }
 }
 
 .colors__action--generate {
