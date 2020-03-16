@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import { lazy } from 'react';
 import { PublicLayout } from './layouts';
 
 const ColorsContainer = lazy(() => import('./containers/ColorsContainer'));
