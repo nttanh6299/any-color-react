@@ -52,7 +52,7 @@
   }
 }
 
-.nav__menu__item {
+.nav__item {
   font-size: 16px;
   color: $gray;
 
@@ -66,6 +66,11 @@
   }
 }
 
-.nav__menu__item--active {
+.nav__item--active {
   color: $dark;
+  cursor: pointer;
+
+  @include m-mobile {
+    cursor: default;
+  }
 }
