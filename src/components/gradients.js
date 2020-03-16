@@ -28,11 +28,15 @@ const Gradients = ({
     generateGradientIfNeeded();
   }, []);
 
+  if (!gradient) {
+    return null;
+  }
+
   return (
     <div className="gradients">
       <div className="inner">
         <Background color={setGradient(gradient)} isCopied={isCopied} />
-        <div className="colors__value">sadasdas</div>
+        <div className="colors__value">{gradient.colors.join(' - ')}</div>
         <div className="colors__actions">
           <Button
             onClick={onGenerateGradient}
