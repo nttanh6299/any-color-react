@@ -13,7 +13,8 @@ const propTypes = {
   onGenerateGradient: PropTypes.func.isRequired,
   prevGradient: PropTypes.func.isRequired,
   nextGradient: PropTypes.func.isRequired,
-  generateGradientIfNeeded: PropTypes.func.isRequired
+  generateGradientIfNeeded: PropTypes.func.isRequired,
+  copyGradientToClipboard: PropTypes.func.isRequired
 };
 
 const Gradients = ({
@@ -22,7 +23,8 @@ const Gradients = ({
   onGenerateGradient,
   prevGradient,
   nextGradient,
-  generateGradientIfNeeded
+  generateGradientIfNeeded,
+  copyGradientToClipboard
 }) => {
   useEffect(() => {
     generateGradientIfNeeded();
@@ -35,7 +37,11 @@ const Gradients = ({
   return (
     <div className="gradients">
       <div className="inner">
-        <Background color={setGradient(gradient)} isCopied={isCopied} />
+        <Background
+          copyToClipboard={copyGradientToClipboard}
+          color={setGradient(gradient)}
+          isCopied={isCopied}
+        />
         <div className="colors__value">{gradient.colors.join(' - ')}</div>
         <div className="colors__actions">
           <Button

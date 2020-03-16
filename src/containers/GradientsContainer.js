@@ -4,7 +4,8 @@ import {
   onGenerateGradient,
   prevGradient,
   nextGradient,
-  generateGradientIfNeeded
+  generateGradientIfNeeded,
+  copyGradientToClipboard
 } from '../actions';
 import Gradients from '../components/gradients';
 import { gradientsSelector } from '../selectors/GradientsSelectors';
@@ -19,5 +20,6 @@ export default connect(mapStateToProps, {
   onGenerateGradient,
   prevGradient,
   nextGradient,
-  generateGradientIfNeeded
+  generateGradientIfNeeded,
+  copyGradientToClipboard
 })(GradientsContainer);

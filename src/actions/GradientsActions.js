@@ -4,7 +4,7 @@ import {
   CHANGE_GRADIENT,
   COPY_GRADIENT_TO_CLIPBOARD
 } from '../constants/ActionTypes';
-import { getRandomColor } from '../utils';
+import { getRandomColor, copyTextToClipboard, setGradient } from '../utils';
 import {
   getPrevGradientIndex,
   getNextGradientIndex,
@@ -21,7 +21,7 @@ const generateGradientSuccess = (colors, deg) => ({
 
 const changeGradientIndex = index => ({ type: CHANGE_GRADIENT, index });
 
-const copyGradientToClipboard = successful => ({
+const copyToClipboard = successful => ({
   type: COPY_GRADIENT_TO_CLIPBOARD,
   successful
 });
@@ -52,10 +52,25 @@ export const nextGradient = () => (dispatch, getState) => {
   }
 };
 
+export const copyGradientToClipboard = () => async (dispatch, getState) => {
+  const state = getState();
+  const gradients = getGradients(state);
+  const hasItems = gradients.list.length > 0;
+  const currentIndex = gradients.currentIndex;
+  const colorsFromGradient = gradients.list[currentIndex];
+
+  if (hasItems && currentIndex >= 0 && !!colorsFromGradient) {
+    const successful = await copyTextToClipboard(
+      setGradient(colorsFromGradient)
+    );
+    dispatch(copyToClipboard(successful));
+  }
+};
+
 export const generateGradientIfNeeded = () => async (dispatch, getState) => {
   const state = getState();
-  const colors = getGradients(state);
-  if (colors.list.length === 0) {
+  const gradients = getGradients(state);
+  if (gradients.list.length === 0) {
     dispatch(onGenerateGradient());
   }
 };

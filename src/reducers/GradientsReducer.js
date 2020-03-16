@@ -1,7 +1,8 @@
 import {
   GENERATE_GRADIENT_REQUEST,
   GENERATE_GRADIENT_SUCCESS,
-  CHANGE_GRADIENT
+  CHANGE_GRADIENT,
+  COPY_GRADIENT_TO_CLIPBOARD
 } from '../constants/ActionTypes';
 
 const initialState = {
@@ -44,6 +45,11 @@ export default function(state = initialState, action) {
         ...state,
         currentIndex: action.index,
         isCopied: false
+      };
+    case COPY_GRADIENT_TO_CLIPBOARD:
+      return {
+        ...state,
+        isCopied: true
       };
     default:
       return state;
