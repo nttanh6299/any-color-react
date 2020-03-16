@@ -1,0 +1,12 @@
+.button {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  border: none;
+  outline: none;
+  padding: 8px 0;
+
+  &:active {
+    transform: translate(0.5px, 0.5px);
+  }
+}

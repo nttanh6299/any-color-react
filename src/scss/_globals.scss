@@ -25,6 +25,14 @@ textarea {
   font-family: 'Poppins', sans-serif;
 }
 
+button {
+  cursor: pointer;
+
+  @include m-mobile {
+    cursor: default;
+  }
+}
+
 body {
   color: $dark;
   font-size: 16px;
