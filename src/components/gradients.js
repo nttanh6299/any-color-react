@@ -53,11 +53,18 @@ const Gradients = ({
   return (
     <div className="gradients">
       <div className="inner">
-        <Background
-          copyToClipboard={copyGradientToClipboard}
-          color={setGradient(gradient)}
-          isCopied={isCopied}
-        />
+        <Background color={setGradient(gradient)}>
+          {!editAngle && (
+            <div onClick={copyGradientToClipboard} className="background__copy">
+              <span className="background__text">
+                <i className="icon material-icons">
+                  {isCopied ? 'done' : 'code'}
+                </i>
+                <span>{isCopied ? 'Copied!' : 'Copy'}</span>
+              </span>
+            </div>
+          )}
+        </Background>
         <div className="colors__handle">
           {renderColor}
           <Button

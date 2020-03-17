@@ -29,11 +29,18 @@ const Colors = ({
   return (
     <div className="colors">
       <div className="inner">
-        <Background
-          color={color}
-          copyToClipboard={copyColorToClipboard}
-          isCopied={isCopied}
-        />
+        <Background color={color}>
+          {color && (
+            <div onClick={copyColorToClipboard} className="background__copy">
+              <span className="background__text">
+                <i className="icon material-icons">
+                  {isCopied ? 'done' : 'code'}
+                </i>
+                <span>{isCopied ? 'Copied!' : 'Copy'}</span>
+              </span>
+            </div>
+          )}
+        </Background>
         <div className="colors__value">{color}</div>
         <div className="colors__actions">
           <Button
