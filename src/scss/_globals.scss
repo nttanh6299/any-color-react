@@ -54,10 +54,9 @@ body {
 }
 
 .inner {
-  width: 400px;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  max-width: 440px;
+  padding: 14px;
+  text-align: center;
+  margin: 0 auto;
 }
