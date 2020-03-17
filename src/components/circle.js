@@ -41,16 +41,17 @@ const Circle = ({ deg, changeGradientDirection, switchEditAngle }) => {
   };
 
   return (
-    <div onMouseMove={onMouseMove} className="circle">
+    <div
+      onMouseMove={onMouseMove}
+      onMouseUp={switchEditAngle}
+      className="circle"
+    >
       <div className="circle__cover"></div>
       <div
         ref={handleRef}
         style={{ transform: `rotate(${deg}deg)` }}
         className="circle__handle"
       ></div>
-      <i onClick={switchEditAngle} className="circle__close material-icons">
-        clear
-      </i>
     </div>
   );
 };

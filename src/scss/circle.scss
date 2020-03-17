@@ -25,16 +25,3 @@
   background: $grayLighter;
   transform-origin: 0 0;
 }
-
-.circle__close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 28px;
-  color: $grayLighter;
-  cursor: pointer;
-
-  @include m-mobile {
-    cursor: default;
-  }
-}
