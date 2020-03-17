@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Background from './background';
 import Button from './button';
+import Circle from './circle';
 import { setGradient } from '../utils';
 
 const propTypes = {
@@ -68,15 +69,7 @@ const Gradients = ({
               </span>
             </div>
           )}
-          {editAngle && (
-            <div className="background__angle">
-              <div className="background__angle__circle"></div>
-              <div
-                style={{ transform: `rotate(-${gradient.deg}deg)` }}
-                className="background__angle__handle"
-              ></div>
-            </div>
-          )}
+          <Circle show={editAngle} deg={gradient && gradient.deg} />
         </Background>
         <div className="colors__handle">
           <Button
