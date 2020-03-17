@@ -2,26 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  copyToClipboard: PropTypes.func.isRequired,
-  isCopied: PropTypes.bool.isRequired,
-  color: PropTypes.string
+  color: PropTypes.string,
+  children: PropTypes.node
 };
 
-const Background = ({ color, copyToClipboard, isCopied }) => {
-  const text = isCopied ? ['done', 'Copied!'] : ['code', 'Copy'];
+const Background = ({ color, children }) => {
   return (
-    <div
-      style={{ background: color }}
-      onClick={copyToClipboard}
-      className="background"
-    >
-      {color && (
-        <div className="background__copy">
-          <span className="background__text">
-            <i className="icon material-icons">{text[0]}</i> {text[1]}
-          </span>
-        </div>
-      )}
+    <div style={{ background: color }} className="background">
+      {children}
     </div>
   );
 };
