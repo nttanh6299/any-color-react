@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Background from './background';
 import Button from './button';
@@ -30,9 +30,24 @@ const Gradients = ({
     generateGradientIfNeeded();
   }, []);
 
-  if (!gradient) {
-    return null;
-  }
+  const renderColor = useMemo(() => {
+    return (
+      gradient &&
+      gradient.colors.map((color, index) => (
+        <Button
+          key={index}
+          style={{
+            background: color,
+            width: '20px',
+            height: '20px',
+            marginRight: '10px',
+            padding: 0,
+            borderRadius: '50%'
+          }}
+        />
+      ))
+    );
+  }, [gradient]);
 
   return (
     <div className="gradients">
@@ -42,7 +57,14 @@ const Gradients = ({
           color={setGradient(gradient)}
           isCopied={isCopied}
         />
-        <div className="colors__value">{gradient.colors.join(' - ')}</div>
+        <div className="colors__handle">
+          {renderColor}
+          <Button
+            style={{ background: 'transparent' }}
+            prefix={<i className="material-icons">add_circle_outline</i>}
+          />
+        </div>
+        <div></div>
         <div className="colors__actions">
           <Button
             onClick={onGenerateGradient}

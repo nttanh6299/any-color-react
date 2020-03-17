@@ -1,6 +1,8 @@
 .colors__value {
   width: 100%;
-  margin: 8px 0 16px 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
   text-transform: uppercase;
   font-size: 18px;
 }
@@ -22,4 +24,12 @@
 
 .colors__action--generate {
   flex: 0 0 100%;
+}
+
+.colors__handle {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
