@@ -2,7 +2,8 @@ import {
   GENERATE_GRADIENT_REQUEST,
   GENERATE_GRADIENT_SUCCESS,
   CHANGE_GRADIENT,
-  COPY_GRADIENT_TO_CLIPBOARD
+  COPY_GRADIENT_TO_CLIPBOARD,
+  ADD_NEW_COLOR
 } from '../constants/ActionTypes';
 import { getRandomColor, copyTextToClipboard, setGradient } from '../utils';
 import {
@@ -72,5 +73,21 @@ export const generateGradientIfNeeded = () => async (dispatch, getState) => {
   const gradients = getGradients(state);
   if (gradients.list.length === 0) {
     dispatch(onGenerateGradient());
+  }
+};
+
+export const addNewColor = () => async (dispatch, getState) => {
+  try {
+    const state = getState();
+    const gradients = getGradients(state);
+    const currentIndex = gradients.currentIndex;
+    const colorsFromGradient = gradients.list[currentIndex];
+
+    if (colorsFromGradient && colorsFromGradient.colors.length < 5) {
+      const color = await getRandomColor();
+      dispatch({ type: ADD_NEW_COLOR, color });
+    }
+  } catch (err) {
+    console.log('add new color error:', err);
   }
 };

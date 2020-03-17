@@ -14,7 +14,8 @@ const propTypes = {
   prevGradient: PropTypes.func.isRequired,
   nextGradient: PropTypes.func.isRequired,
   generateGradientIfNeeded: PropTypes.func.isRequired,
-  copyGradientToClipboard: PropTypes.func.isRequired
+  copyGradientToClipboard: PropTypes.func.isRequired,
+  addNewColor: PropTypes.func.isRequired
 };
 
 const Gradients = ({
@@ -24,12 +25,12 @@ const Gradients = ({
   prevGradient,
   nextGradient,
   generateGradientIfNeeded,
-  copyGradientToClipboard
+  copyGradientToClipboard,
+  addNewColor
 }) => {
   useEffect(() => {
     generateGradientIfNeeded();
   }, []);
-
   const renderColor = useMemo(() => {
     return (
       gradient &&
@@ -60,6 +61,7 @@ const Gradients = ({
         <div className="colors__handle">
           {renderColor}
           <Button
+            onClick={addNewColor}
             style={{ background: 'transparent' }}
             prefix={<i className="material-icons">add_circle_outline</i>}
           />

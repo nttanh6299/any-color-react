@@ -5,7 +5,8 @@ import {
   prevGradient,
   nextGradient,
   generateGradientIfNeeded,
-  copyGradientToClipboard
+  copyGradientToClipboard,
+  addNewColor
 } from '../actions';
 import Gradients from '../components/gradients';
 import { gradientsSelector } from '../selectors/GradientsSelectors';
@@ -21,5 +22,6 @@ export default connect(mapStateToProps, {
   prevGradient,
   nextGradient,
   generateGradientIfNeeded,
-  copyGradientToClipboard
+  copyGradientToClipboard,
+  addNewColor
 })(GradientsContainer);
