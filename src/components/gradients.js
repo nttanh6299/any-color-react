@@ -58,7 +58,7 @@ const Gradients = ({
   }, [gradient]);
 
   return (
-    <div className="gradients">
+    <div className="colors">
       <div className="inner">
         <Background color={setGradient(gradient)}>
           {!editAngle && (
