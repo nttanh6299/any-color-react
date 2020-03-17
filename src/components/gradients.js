@@ -18,7 +18,8 @@ const propTypes = {
   copyGradientToClipboard: PropTypes.func.isRequired,
   addNewColor: PropTypes.func.isRequired,
   editAngle: PropTypes.bool.isRequired,
-  switchEditAngle: PropTypes.func.isRequired
+  switchEditAngle: PropTypes.func.isRequired,
+  changeGradientDirection: PropTypes.func.isRequired
 };
 
 const Gradients = ({
@@ -31,7 +32,8 @@ const Gradients = ({
   copyGradientToClipboard,
   addNewColor,
   editAngle,
-  switchEditAngle
+  switchEditAngle,
+  changeGradientDirection
 }) => {
   useEffect(() => {
     generateGradientIfNeeded();
@@ -69,7 +71,13 @@ const Gradients = ({
               </span>
             </div>
           )}
-          <Circle show={editAngle} deg={gradient && gradient.deg} />
+          {editAngle && (
+            <Circle
+              changeGradientDirection={changeGradientDirection}
+              switchEditAngle={switchEditAngle}
+              deg={gradient.deg}
+            />
+          )}
         </Background>
         <div className="colors__handle">
           <Button

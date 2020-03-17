@@ -7,7 +7,8 @@ import {
   generateGradientIfNeeded,
   copyGradientToClipboard,
   addNewColor,
-  switchEditAngle
+  switchEditAngle,
+  changeGradientDirection
 } from '../actions';
 import Gradients from '../components/gradients';
 import { gradientsSelector } from '../selectors/GradientsSelectors';
@@ -25,5 +26,6 @@ export default connect(mapStateToProps, {
   generateGradientIfNeeded,
   copyGradientToClipboard,
   addNewColor,
-  switchEditAngle
+  switchEditAngle,
+  changeGradientDirection
 })(GradientsContainer);

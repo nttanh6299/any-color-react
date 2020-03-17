@@ -4,7 +4,8 @@ import {
   CHANGE_GRADIENT,
   COPY_GRADIENT_TO_CLIPBOARD,
   ADD_NEW_COLOR,
-  EDIT_ANGLE
+  EDIT_ANGLE,
+  CHANGE_GRADIENT_DIRECTION
 } from '../constants/ActionTypes';
 
 const initialState = {
@@ -27,6 +28,11 @@ function gradient(state = {}, action) {
       return {
         ...state,
         colors: [...state.colors, action.color]
+      };
+    case CHANGE_GRADIENT_DIRECTION:
+      return {
+        ...state,
+        deg: action.deg
       };
     default:
       return state;
@@ -63,10 +69,10 @@ export default function(state = initialState, action) {
         editAngle: false
       };
     case ADD_NEW_COLOR:
+    case CHANGE_GRADIENT_DIRECTION:
       return {
         ...state,
         isCopied: false,
-        editAngle: false,
         list: state.list.map((item, index) => {
           return index === state.currentIndex
             ? gradient(state.list[state.currentIndex], action)
