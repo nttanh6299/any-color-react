@@ -15,7 +15,9 @@ const propTypes = {
   nextGradient: PropTypes.func.isRequired,
   generateGradientIfNeeded: PropTypes.func.isRequired,
   copyGradientToClipboard: PropTypes.func.isRequired,
-  addNewColor: PropTypes.func.isRequired
+  addNewColor: PropTypes.func.isRequired,
+  editAngle: PropTypes.bool.isRequired,
+  switchEditAngle: PropTypes.func.isRequired
 };
 
 const Gradients = ({
@@ -26,7 +28,9 @@ const Gradients = ({
   nextGradient,
   generateGradientIfNeeded,
   copyGradientToClipboard,
-  addNewColor
+  addNewColor,
+  editAngle,
+  switchEditAngle
 }) => {
   useEffect(() => {
     generateGradientIfNeeded();
@@ -64,8 +68,24 @@ const Gradients = ({
               </span>
             </div>
           )}
+          {editAngle && (
+            <div className="background__angle">
+              <div className="background__angle__circle"></div>
+              <div
+                style={{ transform: `rotate(-${gradient.deg}deg)` }}
+                className="background__angle__handle"
+              ></div>
+            </div>
+          )}
         </Background>
         <div className="colors__handle">
+          <Button
+            onClick={switchEditAngle}
+            className={`colors__deg ${editAngle ? 'colors__deg--active' : ''}`}
+            prefix={<i className="material-icons">rotate_right</i>}
+          >
+            {gradient && `${gradient.deg}°`}
+          </Button>
           {renderColor}
           <Button
             onClick={addNewColor}

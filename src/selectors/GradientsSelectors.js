@@ -4,6 +4,7 @@ export const getGradients = state => state.gradients;
 
 export const gradientsSelector = createSelector(getGradients, gradients => ({
   isCopied: gradients.isCopied,
+  editAngle: gradients.editAngle,
   gradient: gradients.list[gradients.currentIndex]
 }));
 

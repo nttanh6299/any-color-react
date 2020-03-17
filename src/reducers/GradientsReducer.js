@@ -3,14 +3,16 @@ import {
   GENERATE_GRADIENT_SUCCESS,
   CHANGE_GRADIENT,
   COPY_GRADIENT_TO_CLIPBOARD,
-  ADD_NEW_COLOR
+  ADD_NEW_COLOR,
+  EDIT_ANGLE
 } from '../constants/ActionTypes';
 
 const initialState = {
   loading: false,
   currentIndex: -1,
   list: [],
-  isCopied: false
+  isCopied: false,
+  editAngle: false
 };
 
 function gradient(state = {}, action) {
@@ -43,6 +45,7 @@ export default function(state = initialState, action) {
         ...state,
         loading: false,
         isCopied: false,
+        editAngle: false,
         currentIndex: state.list.length,
         list: [...state.list, gradient({}, action)]
       };
@@ -50,21 +53,31 @@ export default function(state = initialState, action) {
       return {
         ...state,
         currentIndex: action.index,
-        isCopied: false
+        isCopied: false,
+        editAngle: false
       };
     case COPY_GRADIENT_TO_CLIPBOARD:
       return {
         ...state,
-        isCopied: true
+        isCopied: true,
+        editAngle: false
       };
     case ADD_NEW_COLOR:
       return {
         ...state,
+        isCopied: false,
+        editAngle: false,
         list: state.list.map((item, index) => {
           return index === state.currentIndex
             ? gradient(state.list[state.currentIndex], action)
             : item;
         })
+      };
+    case EDIT_ANGLE:
+      return {
+        ...state,
+        editAngle: !state.editAngle,
+        isCopied: false
       };
     default:
       return state;

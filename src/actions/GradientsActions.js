@@ -3,7 +3,8 @@ import {
   GENERATE_GRADIENT_SUCCESS,
   CHANGE_GRADIENT,
   COPY_GRADIENT_TO_CLIPBOARD,
-  ADD_NEW_COLOR
+  ADD_NEW_COLOR,
+  EDIT_ANGLE
 } from '../constants/ActionTypes';
 import { getRandomColor, copyTextToClipboard, setGradient } from '../utils';
 import {
@@ -26,6 +27,8 @@ const copyToClipboard = successful => ({
   type: COPY_GRADIENT_TO_CLIPBOARD,
   successful
 });
+
+export const switchEditAngle = () => ({ type: EDIT_ANGLE });
 
 export const onGenerateGradient = () => async dispatch => {
   dispatch(generateGradientRequest());
