@@ -2,6 +2,8 @@ $dark: #333;
 
 $gray: #bbb;
 $grayDark: darken($gray, 5);
+$grayLight: lighten($gray, 10);
+$grayLighter: lighten($gray, 20);
 
 * {
   margin: 0;
