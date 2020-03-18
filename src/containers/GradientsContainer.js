@@ -8,15 +8,17 @@ import {
   copyGradientToClipboard,
   addNewColor,
   switchEditAngle,
-  changeGradientDirection
+  changeGradientDirection,
+  togglePrefix
 } from '../actions';
 import Gradients from '../components/gradients';
 import { gradientsSelector } from '../selectors/GradientsSelectors';
+import { settingsSelector } from '../selectors/SettingsSelectors';
 
 const GradientsContainer = props => <Gradients {...props} />;
 
 const mapStateToProps = state => {
-  return { ...gradientsSelector(state) };
+  return { ...gradientsSelector(state), ...settingsSelector(state) };
 };
 
 export default connect(mapStateToProps, {
@@ -27,5 +29,6 @@ export default connect(mapStateToProps, {
   copyGradientToClipboard,
   addNewColor,
   switchEditAngle,
-  changeGradientDirection
+  changeGradientDirection,
+  togglePrefix
 })(GradientsContainer);

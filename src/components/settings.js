@@ -1,11 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Settings = ({}) => {
+const propTypes = {
+  prefix: PropTypes.bool.isRequired,
+  togglePrefix: PropTypes.func.isRequired
+};
+
+const Settings = ({ prefix, togglePrefix }) => {
   return (
     <div className="settings">
-      <div className="settings__section">
+      <div onClick={togglePrefix} className="settings__section">
         <span>Prefixes</span>
-        <i className="icon material-icons">check_box_outline_blank</i>
+        <i className="icon material-icons">
+          {prefix ? 'check_box' : 'check_box_outline_blank'}
+        </i>
       </div>
       <div className="settings__section">
         <span>Fallback</span>
@@ -14,5 +22,7 @@ const Settings = ({}) => {
     </div>
   );
 };
+
+Settings.propTypes = propTypes;
 
 export default Settings;
