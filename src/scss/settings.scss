@@ -1,0 +1,27 @@
+.settings {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.settings__section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  & + & {
+    margin-left: 20px;
+  }
+
+  &:active {
+    transform: translate(0.5px, 0.5px);
+  }
+
+  @include m-mobile {
+    cursor: default;
+  }
+}

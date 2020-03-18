@@ -4,6 +4,7 @@ import Background from './background';
 import Button from './button';
 import Circle from './circle';
 import Copy from './copy';
+import Settings from './settings';
 import { setGradient } from '../utils';
 
 const propTypes = {
@@ -61,6 +62,7 @@ const Gradients = ({
   return (
     <div className="colors">
       <div className="inner">
+        <Settings />
         <Background color={setGradient(gradient)}>
           {!editAngle ? (
             <Copy
