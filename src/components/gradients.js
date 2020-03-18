@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Background from './background';
 import Button from './button';
 import Circle from './circle';
+import Copy from './copy';
 import { setGradient } from '../utils';
 
 const propTypes = {
@@ -61,17 +62,12 @@ const Gradients = ({
     <div className="colors">
       <div className="inner">
         <Background color={setGradient(gradient)}>
-          {!editAngle && (
-            <div onClick={copyGradientToClipboard} className="background__copy">
-              <span className="background__text">
-                <i className="icon material-icons">
-                  {isCopied ? 'done' : 'code'}
-                </i>
-                <span>{isCopied ? 'Copied!' : 'Copy'}</span>
-              </span>
-            </div>
-          )}
-          {editAngle && (
+          {!editAngle ? (
+            <Copy
+              copyToClipboard={copyGradientToClipboard}
+              isCopied={isCopied}
+            />
+          ) : (
             <Circle
               changeGradientDirection={changeGradientDirection}
               switchEditAngle={switchEditAngle}

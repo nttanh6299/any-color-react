@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Background from './background';
 import Button from './button';
+import Copy from './copy';
 
 const propTypes = {
   color: PropTypes.string,
@@ -31,14 +32,7 @@ const Colors = ({
       <div className="inner">
         <Background color={color}>
           {color && (
-            <div onClick={copyColorToClipboard} className="background__copy">
-              <span className="background__text">
-                <i className="icon material-icons">
-                  {isCopied ? 'done' : 'code'}
-                </i>
-                <span>{isCopied ? 'Copied!' : 'Copy'}</span>
-              </span>
-            </div>
+            <Copy copyToClipboard={copyColorToClipboard} isCopied={isCopied} />
           )}
         </Background>
         <div className="colors__value">{color}</div>

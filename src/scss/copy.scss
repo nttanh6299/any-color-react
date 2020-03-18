@@ -1,0 +1,25 @@
+.copy {
+  opacity: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  z-index: 1;
+  transition: all 0.2s linear;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.copy__text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
