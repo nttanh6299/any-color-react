@@ -25,6 +25,7 @@ const Colors = ({
 }) => {
   useEffect(() => {
     generateColorIfNeeded();
+    document.title = 'AnyColorReact - Colors';
   }, []);
 
   return (

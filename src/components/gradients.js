@@ -47,6 +47,7 @@ const Gradients = ({
 }) => {
   useEffect(() => {
     generateGradientIfNeeded();
+    document.title = 'AnyColorReact - Gradients';
   }, []);
   const renderColor = useMemo(() => {
     return (
