@@ -13,6 +13,7 @@ import {
   getNextGradientIndex,
   getGradients
 } from '../selectors/GradientsSelectors';
+import { getSettings } from '../selectors/SettingsSelectors';
 
 const generateGradientRequest = () => ({ type: GENERATE_GRADIENT_REQUEST });
 
@@ -65,13 +66,15 @@ export const nextGradient = () => (dispatch, getState) => {
 export const copyGradientToClipboard = () => async (dispatch, getState) => {
   const state = getState();
   const gradients = getGradients(state);
+  const { prefix, fallback } = getSettings(state);
+
   const hasItems = gradients.list.length > 0;
   const currentIndex = gradients.currentIndex;
   const colorsFromGradient = gradients.list[currentIndex];
 
   if (hasItems && currentIndex >= 0 && !!colorsFromGradient) {
     const successful = await copyTextToClipboard(
-      setGradient(colorsFromGradient)
+      setGradient(colorsFromGradient, prefix, fallback, true, true)
     );
     dispatch(copyToClipboard(successful));
   }
