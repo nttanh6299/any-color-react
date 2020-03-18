@@ -23,7 +23,9 @@ const propTypes = {
   switchEditAngle: PropTypes.func.isRequired,
   changeGradientDirection: PropTypes.func.isRequired,
   prefix: PropTypes.bool.isRequired,
-  togglePrefix: PropTypes.func.isRequired
+  fallback: PropTypes.bool.isRequired,
+  togglePrefix: PropTypes.func.isRequired,
+  toggleFallback: PropTypes.func.isRequired
 };
 
 const Gradients = ({
@@ -39,7 +41,9 @@ const Gradients = ({
   switchEditAngle,
   changeGradientDirection,
   prefix,
-  togglePrefix
+  fallback,
+  togglePrefix,
+  toggleFallback
 }) => {
   useEffect(() => {
     generateGradientIfNeeded();
@@ -66,7 +70,12 @@ const Gradients = ({
   return (
     <div className="colors">
       <div className="inner">
-        <Settings togglePrefix={togglePrefix} prefix={prefix} />
+        <Settings
+          togglePrefix={togglePrefix}
+          toggleFallback={toggleFallback}
+          prefix={prefix}
+          fallback={fallback}
+        />
         <Background color={setGradient(gradient)}>
           {!editAngle ? (
             <Copy

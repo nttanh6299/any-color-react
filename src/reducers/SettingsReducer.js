@@ -1,4 +1,4 @@
-import { TOGGLE_PREFIX } from '../constants/ActionTypes';
+import { TOGGLE_PREFIX, TOGGLE_FALLBACK } from '../constants/ActionTypes';
 
 const initialState = {
   prefix: false,
@@ -11,6 +11,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         prefix: !state.prefix
+      };
+    case TOGGLE_FALLBACK:
+      return {
+        ...state,
+        fallback: !state.fallback
       };
     default:
       return state;
