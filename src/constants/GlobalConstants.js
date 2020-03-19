@@ -1,14 +1,14 @@
 export const HEADER_LINKS = [
   {
-    key: 'colors',
-    label: 'Colors',
+    key: 'gradients',
+    label: 'Gradients',
     to: '/',
     exact: true
   },
   {
-    key: 'gradients',
-    label: 'Gradients',
-    to: '/gradients',
+    key: 'colors',
+    label: 'Colors',
+    to: '/colors',
     exact: true
   }
 ];

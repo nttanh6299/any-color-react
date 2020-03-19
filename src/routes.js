@@ -8,13 +8,13 @@ const GradientsContainer = lazy(() =>
 
 const routes = [
   {
-    path: '/',
+    path: '/colors',
     exact: true,
     layout: PublicLayout,
     component: ColorsContainer
   },
   {
-    path: '/gradients',
+    path: '/',
     exact: true,
     layout: PublicLayout,
     component: GradientsContainer
