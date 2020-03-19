@@ -23,9 +23,14 @@ export function setGradient(
   const { colors, deg } = gradient;
   let result = [];
   if (fallback) {
-    result.push(`${colors[0]}`);
+    result.push(`${colors[0].color}`);
   }
-  result.push(`linear-gradient(${deg}deg,${colors})`);
+  result.push(
+    `linear-gradient(${deg}deg,${colors.map(
+      item => `${item.color} ${item.stop}%`
+    )})`
+  );
+  console.log(result);
 
   if (prefix) {
     const prefixes = ['-webkit-', '-o-'];

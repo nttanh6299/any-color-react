@@ -7,6 +7,7 @@ import {
   EDIT_ANGLE,
   CHANGE_GRADIENT_DIRECTION
 } from '../constants/ActionTypes';
+import { calculateStop } from '../utils';
 
 const initialState = {
   loading: false,
@@ -16,18 +17,32 @@ const initialState = {
   editAngle: false
 };
 
-function gradient(state = {}, action) {
+const initialGradient = {
+  colors: [],
+  deg: 0
+};
+function gradient(state = initialGradient, action) {
   switch (action.type) {
     case GENERATE_GRADIENT_SUCCESS:
       return {
         ...state,
-        colors: [...action.colors],
+        colors: state.colors
+          .concat(action.colors)
+          .map((color, index, colors) => ({
+            color,
+            stop: calculateStop(100, colors.length, index)
+          })),
         deg: action.deg
       };
     case ADD_NEW_COLOR:
       return {
         ...state,
-        colors: [...state.colors, action.color]
+        colors: state.colors
+          .concat({ color: action.color })
+          .map((color, index, colors) => ({
+            ...color,
+            stop: calculateStop(100, colors.length, index)
+          }))
       };
     case CHANGE_GRADIENT_DIRECTION:
       return {
@@ -53,7 +68,7 @@ export default function(state = initialState, action) {
         isCopied: false,
         editAngle: false,
         currentIndex: state.list.length,
-        list: [...state.list, gradient({}, action)]
+        list: [...state.list, gradient(undefined, action)]
       };
     case CHANGE_GRADIENT:
       return {

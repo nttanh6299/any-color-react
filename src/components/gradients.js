@@ -9,7 +9,7 @@ import { setGradient } from '../utils';
 
 const propTypes = {
   gradient: PropTypes.shape({
-    colors: PropTypes.arrayOf(PropTypes.string),
+    colors: PropTypes.array,
     deg: PropTypes.number
   }),
   isCopied: PropTypes.bool.isRequired,
@@ -52,7 +52,7 @@ const Gradients = ({
   const renderColor = useMemo(() => {
     return (
       gradient &&
-      gradient.colors.map((color, index) => (
+      gradient.colors.map(({ color }, index) => (
         <Button
           key={index}
           style={{
