@@ -7,7 +7,8 @@ import {
   EDIT_ANGLE,
   CHANGE_GRADIENT_DIRECTION,
   TOGGLE_EDIT_COLOR_OF_GRADIENT,
-  EDIT_COLOR_OF_GRADIENT
+  EDIT_COLOR_OF_GRADIENT,
+  TOGGLE_SLIDER
 } from '../constants/ActionTypes';
 import { getRandomColor, copyTextToClipboard, setGradient } from '../utils';
 import {
@@ -115,3 +116,5 @@ export const editColorOfGradient = color => ({
   type: EDIT_COLOR_OF_GRADIENT,
   color
 });
+
+export const toggleSlider = () => ({ type: TOGGLE_SLIDER });

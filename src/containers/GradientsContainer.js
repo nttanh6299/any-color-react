@@ -12,7 +12,8 @@ import {
   togglePrefix,
   toggleFallback,
   toggleEditColorOfGradient,
-  editColorOfGradient
+  editColorOfGradient,
+  toggleSlider
 } from '../actions';
 import Gradients from '../components/gradients';
 import { gradientsSelector } from '../selectors/GradientsSelectors';
@@ -36,5 +37,6 @@ export default connect(mapStateToProps, {
   togglePrefix,
   toggleFallback,
   toggleEditColorOfGradient,
-  editColorOfGradient
+  editColorOfGradient,
+  toggleSlider
 })(GradientsContainer);

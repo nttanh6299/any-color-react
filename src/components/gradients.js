@@ -7,6 +7,7 @@ import Copy from './copy';
 import Settings from './settings';
 import ColorPicker from './color-picker';
 import { setGradient } from '../utils';
+import ColorRendered from './color-rendered';
 
 const propTypes = {
   gradient: PropTypes.shape({
@@ -28,7 +29,8 @@ const propTypes = {
   togglePrefix: PropTypes.func.isRequired,
   toggleFallback: PropTypes.func.isRequired,
   toggleEditColorOfGradient: PropTypes.func.isRequired,
-  editColorOfGradient: PropTypes.func.isRequired
+  editColorOfGradient: PropTypes.func.isRequired,
+  toggleSlider: PropTypes.func.isRequired
 };
 
 const Gradients = ({
@@ -48,45 +50,13 @@ const Gradients = ({
   togglePrefix,
   toggleFallback,
   toggleEditColorOfGradient,
-  editColorOfGradient
+  editColorOfGradient,
+  toggleSlider
 }) => {
   useEffect(() => {
     generateGradientIfNeeded();
     document.title = 'AnyColorReact - Gradients';
   }, []);
-
-  const renderColor = useMemo(() => {
-    const onClick = index => () => {
-      toggleEditColorOfGradient(index);
-    };
-
-    return (
-      gradient &&
-      gradient.colors.map(({ color }, index) => {
-        const { colorEditing } = gradient;
-        const active =
-          index === colorEditing.index && colorEditing.showHub
-            ? 'button--active'
-            : '';
-        return (
-          <Button
-            key={index}
-            className={active}
-            onClick={onClick(index)}
-            style={{
-              position: 'relative',
-              background: color,
-              width: '20px',
-              height: '20px',
-              marginRight: '10px',
-              padding: 0,
-              borderRadius: '50%'
-            }}
-          />
-        );
-      })
-    );
-  }, [gradient]);
 
   return (
     <div className="colors">
@@ -125,11 +95,15 @@ const Gradients = ({
           />
           <Button
             onClick={addNewColor}
-            style={{ background: 'transparent' }}
+            style={{ background: 'transparent', marginRight: '6px' }}
             prefix={<i className="material-icons">add_circle_outline</i>}
           />
+          <Button
+            onClick={toggleSlider}
+            style={{ background: 'transparent' }}
+            prefix={<i className="material-icons">wrap_text</i>}
+          />
         </div>
-        <div></div>
         <div className="colors__actions">
           <ColorPicker
             color={gradient && gradient.colorEditing}

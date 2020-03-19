@@ -7,7 +7,8 @@ import {
   EDIT_ANGLE,
   CHANGE_GRADIENT_DIRECTION,
   TOGGLE_EDIT_COLOR_OF_GRADIENT,
-  EDIT_COLOR_OF_GRADIENT
+  EDIT_COLOR_OF_GRADIENT,
+  TOGGLE_SLIDER
 } from '../constants/ActionTypes';
 import { calculateStop } from '../utils';
 
@@ -22,7 +23,8 @@ const initialState = {
 const initialGradient = {
   colors: [],
   deg: 0,
-  colorEditing: { showHub: false, color: '', index: -1 }
+  colorEditing: { showHub: false, color: '', index: -1 },
+  showSlider: false
 };
 
 function gradient(state = initialGradient, action) {
@@ -78,6 +80,11 @@ function gradient(state = initialGradient, action) {
             : color;
         })
       };
+    case TOGGLE_SLIDER:
+      return {
+        ...state,
+        showSlider: !state.showSlider
+      };
     default:
       return state;
   }
@@ -116,6 +123,7 @@ export default function(state = initialState, action) {
     case EDIT_COLOR_OF_GRADIENT:
     case TOGGLE_EDIT_COLOR_OF_GRADIENT:
     case CHANGE_GRADIENT_DIRECTION:
+    case TOGGLE_SLIDER:
       return {
         ...state,
         isCopied: false,
