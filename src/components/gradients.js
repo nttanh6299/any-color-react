@@ -26,7 +26,9 @@ const propTypes = {
   prefix: PropTypes.bool.isRequired,
   fallback: PropTypes.bool.isRequired,
   togglePrefix: PropTypes.func.isRequired,
-  toggleFallback: PropTypes.func.isRequired
+  toggleFallback: PropTypes.func.isRequired,
+  toggleEditColorOfGradient: PropTypes.func.isRequired,
+  editColorOfGradient: PropTypes.func.isRequired
 };
 
 const Gradients = ({
@@ -45,7 +47,8 @@ const Gradients = ({
   fallback,
   togglePrefix,
   toggleFallback,
-  toggleEditColorOfGradient
+  toggleEditColorOfGradient,
+  editColorOfGradient
 }) => {
   useEffect(() => {
     generateGradientIfNeeded();
@@ -72,12 +75,7 @@ const Gradients = ({
             padding: 0,
             borderRadius: '50%'
           }}
-        >
-          <ColorPicker
-            visible={gradient.colorIndexEditing === index}
-            colorIndex={index}
-          />
-        </Button>
+        />
       ))
     );
   }, [gradient]);
@@ -122,6 +120,10 @@ const Gradients = ({
         </div>
         <div></div>
         <div className="colors__actions">
+          <ColorPicker
+            color={gradient && gradient.colorEditing}
+            editColorOfGradient={editColorOfGradient}
+          />
           <Button
             onClick={onGenerateGradient}
             className="colors__action colors__action--generate"

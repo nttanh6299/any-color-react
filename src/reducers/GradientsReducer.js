@@ -6,7 +6,8 @@ import {
   ADD_NEW_COLOR,
   EDIT_ANGLE,
   CHANGE_GRADIENT_DIRECTION,
-  TOGGLE_EDIT_COLOR_OF_GRADIENT
+  TOGGLE_EDIT_COLOR_OF_GRADIENT,
+  EDIT_COLOR_OF_GRADIENT
 } from '../constants/ActionTypes';
 import { calculateStop } from '../utils';
 
@@ -21,7 +22,7 @@ const initialState = {
 const initialGradient = {
   colors: [],
   deg: 0,
-  colorIndexEditing: null
+  colorEditing: { showHub: false, color: '', index: -1 }
 };
 
 function gradient(state = initialGradient, action) {
@@ -55,7 +56,27 @@ function gradient(state = initialGradient, action) {
     case TOGGLE_EDIT_COLOR_OF_GRADIENT:
       return {
         ...state,
-        colorIndexEditing: action.colorIndex
+        colorEditing: {
+          color: state.colors[action.colorIndex].color,
+          index: action.colorIndex,
+          showHub:
+            state.colorEditing.index !== action.colorIndex
+              ? true
+              : !state.colorEditing.showHub
+        }
+      };
+    case EDIT_COLOR_OF_GRADIENT:
+      return {
+        ...state,
+        colorEditing: {
+          ...state.colorEditing,
+          color: action.color
+        },
+        colors: state.colors.map((color, index) => {
+          return index === state.colorEditing.index
+            ? { color: action.color, stop: color.stop }
+            : color;
+        })
       };
     default:
       return state;
@@ -92,6 +113,7 @@ export default function(state = initialState, action) {
         editAngle: false
       };
     case ADD_NEW_COLOR:
+    case EDIT_COLOR_OF_GRADIENT:
     case TOGGLE_EDIT_COLOR_OF_GRADIENT:
     case CHANGE_GRADIENT_DIRECTION:
       return {
