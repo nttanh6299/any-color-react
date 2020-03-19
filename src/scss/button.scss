@@ -10,3 +10,8 @@
     transform: translate(0.5px, 0.5px);
   }
 }
+
+.button--active {
+  transform: scale(1.3);
+  transition: 0.2s;
+}

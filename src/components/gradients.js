@@ -62,21 +62,29 @@ const Gradients = ({
 
     return (
       gradient &&
-      gradient.colors.map(({ color }, index) => (
-        <Button
-          key={index}
-          onClick={onClick(index)}
-          style={{
-            position: 'relative',
-            background: color,
-            width: '20px',
-            height: '20px',
-            marginRight: '10px',
-            padding: 0,
-            borderRadius: '50%'
-          }}
-        />
-      ))
+      gradient.colors.map(({ color }, index) => {
+        const { colorEditing } = gradient;
+        const active =
+          index === colorEditing.index && colorEditing.showHub
+            ? 'button--active'
+            : '';
+        return (
+          <Button
+            key={index}
+            className={active}
+            onClick={onClick(index)}
+            style={{
+              position: 'relative',
+              background: color,
+              width: '20px',
+              height: '20px',
+              marginRight: '10px',
+              padding: 0,
+              borderRadius: '50%'
+            }}
+          />
+        );
+      })
     );
   }, [gradient]);
 
