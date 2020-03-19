@@ -119,7 +119,10 @@ const Gradients = ({
           >
             {gradient && `${gradient.deg}°`}
           </Button>
-          {renderColor}
+          <ColorRendered
+            gradient={gradient}
+            toggleEditColorOfGradient={toggleEditColorOfGradient}
+          />
           <Button
             onClick={addNewColor}
             style={{ background: 'transparent' }}
