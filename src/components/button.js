@@ -10,7 +10,14 @@ const propTypes = {
   style: PropTypes.object
 };
 
-const Button = ({ children, prefix, suffix, onClick, className, style }) => {
+const Button = ({
+  children,
+  prefix,
+  suffix,
+  onClick,
+  className = '',
+  style
+}) => {
   return (
     <button onClick={onClick} style={style} className={`button ${className}`}>
       {prefix}
