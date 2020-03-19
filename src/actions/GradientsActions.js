@@ -5,7 +5,8 @@ import {
   COPY_GRADIENT_TO_CLIPBOARD,
   ADD_NEW_COLOR,
   EDIT_ANGLE,
-  CHANGE_GRADIENT_DIRECTION
+  CHANGE_GRADIENT_DIRECTION,
+  TOGGLE_EDIT_COLOR_OF_GRADIENT
 } from '../constants/ActionTypes';
 import { getRandomColor, copyTextToClipboard, setGradient } from '../utils';
 import {
@@ -103,3 +104,8 @@ export const addNewColor = () => async (dispatch, getState) => {
     console.log('add new color error:', err);
   }
 };
+
+export const toggleEditColorOfGradient = colorIndex => ({
+  type: TOGGLE_EDIT_COLOR_OF_GRADIENT,
+  colorIndex
+});

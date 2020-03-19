@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Background from './background';
 import Button from './button';
 import Circle from './circle';
 import Copy from './copy';
 import Settings from './settings';
+import ColorPicker from './color-picker';
 import { setGradient } from '../utils';
 
 const propTypes = {
@@ -43,19 +44,27 @@ const Gradients = ({
   prefix,
   fallback,
   togglePrefix,
-  toggleFallback
+  toggleFallback,
+  toggleEditColorOfGradient
 }) => {
   useEffect(() => {
     generateGradientIfNeeded();
     document.title = 'AnyColorReact - Gradients';
   }, []);
+
   const renderColor = useMemo(() => {
+    const onClick = index => () => {
+      toggleEditColorOfGradient(index);
+    };
+
     return (
       gradient &&
       gradient.colors.map(({ color }, index) => (
         <Button
           key={index}
+          onClick={onClick(index)}
           style={{
+            position: 'relative',
             background: color,
             width: '20px',
             height: '20px',
@@ -63,7 +72,12 @@ const Gradients = ({
             padding: 0,
             borderRadius: '50%'
           }}
-        />
+        >
+          <ColorPicker
+            visible={gradient.colorIndexEditing === index}
+            colorIndex={index}
+          />
+        </Button>
       ))
     );
   }, [gradient]);

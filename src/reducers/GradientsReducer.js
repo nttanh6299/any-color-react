@@ -5,7 +5,8 @@ import {
   COPY_GRADIENT_TO_CLIPBOARD,
   ADD_NEW_COLOR,
   EDIT_ANGLE,
-  CHANGE_GRADIENT_DIRECTION
+  CHANGE_GRADIENT_DIRECTION,
+  TOGGLE_EDIT_COLOR_OF_GRADIENT
 } from '../constants/ActionTypes';
 import { calculateStop } from '../utils';
 
@@ -19,8 +20,10 @@ const initialState = {
 
 const initialGradient = {
   colors: [],
-  deg: 0
+  deg: 0,
+  colorIndexEditing: null
 };
+
 function gradient(state = initialGradient, action) {
   switch (action.type) {
     case GENERATE_GRADIENT_SUCCESS:
@@ -48,6 +51,11 @@ function gradient(state = initialGradient, action) {
       return {
         ...state,
         deg: action.deg
+      };
+    case TOGGLE_EDIT_COLOR_OF_GRADIENT:
+      return {
+        ...state,
+        colorIndexEditing: action.colorIndex
       };
     default:
       return state;
@@ -84,6 +92,7 @@ export default function(state = initialState, action) {
         editAngle: false
       };
     case ADD_NEW_COLOR:
+    case TOGGLE_EDIT_COLOR_OF_GRADIENT:
     case CHANGE_GRADIENT_DIRECTION:
       return {
         ...state,

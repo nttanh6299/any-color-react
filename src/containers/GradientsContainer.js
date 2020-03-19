@@ -10,7 +10,8 @@ import {
   switchEditAngle,
   changeGradientDirection,
   togglePrefix,
-  toggleFallback
+  toggleFallback,
+  toggleEditColorOfGradient
 } from '../actions';
 import Gradients from '../components/gradients';
 import { gradientsSelector } from '../selectors/GradientsSelectors';
@@ -32,5 +33,6 @@ export default connect(mapStateToProps, {
   switchEditAngle,
   changeGradientDirection,
   togglePrefix,
-  toggleFallback
+  toggleFallback,
+  toggleEditColorOfGradient
 })(GradientsContainer);
