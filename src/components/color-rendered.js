@@ -1,7 +1,44 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useEffect, useRef } from 'react';
 import Button from './button';
+import { offset } from '../utils';
 
-const ColorRendered = ({ gradient, toggleEditColorOfGradient }) => {
+const ColorRendered = ({
+  gradient,
+  toggleEditColorOfGradient,
+  startUpdateColorStop,
+  updateColorStop
+}) => {
+  const slider = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+    };
+  }, []);
+
+  const onMouseDown = index => () => {
+    const { showSlider } = gradient;
+    if (showSlider) {
+      startUpdateColorStop(index);
+      window.addEventListener('mouseup', onMouseUp);
+      window.addEventListener('mousemove', onMouseMove);
+    }
+  };
+
+  const onMouseMove = e => {
+    const { clientX } = e;
+    const { current } = slider;
+    const diff = clientX - offset(current, 'left');
+    const percent = Math.min(Math.max(diff / current.offsetWidth, 0), 1);
+    updateColorStop(Math.floor(percent * 100));
+  };
+
+  const onMouseUp = () => {
+    window.removeEventListener('mousemove', onMouseMove);
+    window.removeEventListener('mouseup', onMouseUp);
+  };
+
   const onClick = useCallback(
     index => () => {
       toggleEditColorOfGradient(index);
@@ -27,11 +64,12 @@ const ColorRendered = ({ gradient, toggleEditColorOfGradient }) => {
         <Button
           key={index}
           className={`color-rendered__slider__handle ${active}`}
+          onMouseDown={onMouseDown(index)}
           onClick={onClick(index)}
           style={{
             background: color,
             top: 0,
-            right: `${rightStop}%`
+            left: `${rightStop}%`
           }}
         />
       );
@@ -48,7 +86,7 @@ const ColorRendered = ({ gradient, toggleEditColorOfGradient }) => {
   const opacity = showSlider ? 1 : 0;
 
   return (
-    <div className="color-rendered">
+    <div className="color-rendered" ref={slider}>
       <div
         style={{ width: `${sliderWidth}${unit}` }}
         className="color-rendered__slider"

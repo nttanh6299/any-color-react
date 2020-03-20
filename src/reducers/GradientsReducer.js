@@ -8,7 +8,9 @@ import {
   CHANGE_GRADIENT_DIRECTION,
   TOGGLE_EDIT_COLOR_OF_GRADIENT,
   EDIT_COLOR_OF_GRADIENT,
-  TOGGLE_SLIDER
+  TOGGLE_SLIDER,
+  START_UPDATE_COLOR_STOP,
+  UPDATE_COLOR_STOP
 } from '../constants/ActionTypes';
 import { calculateStop } from '../utils';
 
@@ -23,7 +25,7 @@ const initialState = {
 const initialGradient = {
   colors: [],
   deg: 0,
-  colorEditing: { showHub: false, color: '', index: -1 },
+  colorEditing: { showHub: false, color: '', stop: 0, index: -1 },
   showSlider: false
 };
 
@@ -60,6 +62,7 @@ function gradient(state = initialGradient, action) {
         ...state,
         colorEditing: {
           color: state.colors[action.colorIndex].color,
+          stop: state.colors[action.colorIndex].stop,
           index: action.colorIndex,
           showHub:
             state.colorEditing.index !== action.colorIndex
@@ -76,7 +79,7 @@ function gradient(state = initialGradient, action) {
         },
         colors: state.colors.map((color, index) => {
           return index === state.colorEditing.index
-            ? { color: action.color, stop: color.stop }
+            ? { ...color, color: action.color }
             : color;
         })
       };
@@ -84,6 +87,29 @@ function gradient(state = initialGradient, action) {
       return {
         ...state,
         showSlider: !state.showSlider
+      };
+    case START_UPDATE_COLOR_STOP:
+      return {
+        ...state,
+        colorEditing: {
+          ...state.colorEditing,
+          color: state.colors[action.colorIndex].color,
+          stop: state.colors[action.colorIndex].stop,
+          index: action.colorIndex
+        }
+      };
+    case UPDATE_COLOR_STOP:
+      return {
+        ...state,
+        colorEditing: {
+          ...state.colorEditing,
+          stop: action.stop
+        },
+        colors: state.colors.map((color, index) => {
+          return index === state.colorEditing.index
+            ? { ...color, stop: action.percent }
+            : color;
+        })
       };
     default:
       return state;
@@ -119,6 +145,8 @@ export default function(state = initialState, action) {
         isCopied: true,
         editAngle: false
       };
+    case START_UPDATE_COLOR_STOP:
+    case UPDATE_COLOR_STOP:
     case ADD_NEW_COLOR:
     case EDIT_COLOR_OF_GRADIENT:
     case TOGGLE_EDIT_COLOR_OF_GRADIENT:

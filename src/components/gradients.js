@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Background from './background';
 import Button from './button';
@@ -51,7 +51,10 @@ const Gradients = ({
   toggleFallback,
   toggleEditColorOfGradient,
   editColorOfGradient,
-  toggleSlider
+  toggleSlider,
+  startUpdateColorStop,
+  updateColorStop,
+  endUpdateColorStop
 }) => {
   useEffect(() => {
     generateGradientIfNeeded();
@@ -92,6 +95,10 @@ const Gradients = ({
           <ColorRendered
             gradient={gradient}
             toggleEditColorOfGradient={toggleEditColorOfGradient}
+            editColorOfGradient={editColorOfGradient}
+            startUpdateColorStop={startUpdateColorStop}
+            updateColorStop={updateColorStop}
+            endUpdateColorStop={endUpdateColorStop}
           />
           <Button
             onClick={addNewColor}

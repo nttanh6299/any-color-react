@@ -12,9 +12,10 @@ const ColorPicker = ({ color, editColorOfGradient }) => {
     return null;
   }
 
-  const handleChange = color => {
-    const { hex } = color;
-    editColorOfGradient(hex);
+  const handleChange = colorSelected => {
+    const { hex } = colorSelected;
+    const { stop } = color;
+    editColorOfGradient(hex, stop);
   };
 
   return (
