@@ -10,7 +10,7 @@ const HeaderLink = ({ to, label, exact }) => (
       return match ? (
         <span className="nav__item nav__item--active">{label}</span>
       ) : (
-        <Link to={to} className={`nav__item`}>
+        <Link to={`.${to}`} className={`nav__item`}>
           {label}
         </Link>
       );
@@ -25,7 +25,7 @@ const Nav = () => {
         <div className="nav__inner">
           <section className="nav__section nav__section--logo">
             <Link to="./" className="nav__logo">
-              AnyColorReact
+              Any Color React
             </Link>
           </section>
           <section className="nav__section nav__section--menu">
