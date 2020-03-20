@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Button from './button';
-import { offset } from '../utils';
+import { offset, preventClick } from '../utils';
 
 const propTypes = {
   gradient: PropTypes.object,
@@ -73,7 +73,7 @@ const ColorRendered = ({
           key={index}
           className={`color-rendered__slider__handle ${active}`}
           onMouseDown={onMouseDown(index)}
-          onClick={onClick(index)}
+          onClick={showSlider ? preventClick : onClick(index)}
           style={{
             background: color,
             top: 0,
