@@ -5,7 +5,6 @@ const propTypes = {
   children: PropTypes.node,
   prefix: PropTypes.node,
   suffix: PropTypes.node,
-  onClick: PropTypes.func,
   className: PropTypes.string,
   style: PropTypes.object
 };
@@ -14,12 +13,12 @@ const Button = ({
   children,
   prefix,
   suffix,
-  onClick,
   className = '',
-  style
+  style,
+  ...props
 }) => {
   return (
-    <button onClick={onClick} style={style} className={`button ${className}`}>
+    <button {...props} style={style} className={`button ${className}`}>
       {prefix}
       {children}
       {suffix}
