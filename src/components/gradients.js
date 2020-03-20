@@ -30,7 +30,9 @@ const propTypes = {
   toggleFallback: PropTypes.func.isRequired,
   toggleEditColorOfGradient: PropTypes.func.isRequired,
   editColorOfGradient: PropTypes.func.isRequired,
-  toggleSlider: PropTypes.func.isRequired
+  toggleSlider: PropTypes.func.isRequired,
+  startUpdateColorStop: PropTypes.func.isRequired,
+  updateColorStop: PropTypes.func.isRequired
 };
 
 const Gradients = ({
@@ -53,8 +55,7 @@ const Gradients = ({
   editColorOfGradient,
   toggleSlider,
   startUpdateColorStop,
-  updateColorStop,
-  endUpdateColorStop
+  updateColorStop
 }) => {
   useEffect(() => {
     generateGradientIfNeeded();
@@ -98,7 +99,6 @@ const Gradients = ({
             editColorOfGradient={editColorOfGradient}
             startUpdateColorStop={startUpdateColorStop}
             updateColorStop={updateColorStop}
-            endUpdateColorStop={endUpdateColorStop}
           />
           <Button
             onClick={addNewColor}
