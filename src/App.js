@@ -1,5 +1,6 @@
 import React from 'react';
-import { Switch, BrowserRouter as Router } from 'react-router-dom';
+//use HashRouter if you want to deploy to github page
+import { Switch, HashRouter } from 'react-router-dom';
 import { PublicRoute } from './layouts';
 import routes from './routes';
 
@@ -22,9 +23,9 @@ const renderRoutes = routes => {
 
 function App() {
   return (
-    <Router>
+    <HashRouter basename="/">
       <Switch>{renderRoutes(routes)}</Switch>
-    </Router>
+    </HashRouter>
   );
 }
 
