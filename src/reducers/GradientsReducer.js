@@ -10,7 +10,9 @@ import {
   EDIT_COLOR_OF_GRADIENT,
   TOGGLE_SLIDER,
   START_UPDATE_COLOR_STOP,
-  UPDATE_COLOR_STOP
+  UPDATE_COLOR_STOP,
+  TOGGLE_PREFIX,
+  TOGGLE_FALLBACK
 } from '../constants/ActionTypes';
 import { calculateStop } from '../utils';
 
@@ -165,6 +167,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         editAngle: !state.editAngle,
+        isCopied: false
+      };
+    case TOGGLE_PREFIX:
+    case TOGGLE_FALLBACK:
+      return {
+        ...state,
         isCopied: false
       };
     default:
