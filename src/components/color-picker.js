@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SliderPicker } from 'react-color';
+import { HuePicker } from 'react-color';
 
 const propTypes = {
   color: PropTypes.object,
@@ -20,7 +20,7 @@ const ColorPicker = ({ color, editColorOfGradient }) => {
 
   return (
     <div className="color-picker">
-      <SliderPicker width="100%" color={color.color} onChange={handleChange} />
+      <HuePicker width="100%" color={color.color} onChange={handleChange} />
     </div>
   );
 };
