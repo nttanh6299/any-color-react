@@ -64,7 +64,7 @@ const ColorRendered = ({
     return colors.map(({ color, stop }, index) => {
       const active =
         colorIndexEditing === index && showHub ? 'button--active' : '';
-      const rightStop = showSlider
+      const leftStop = showSlider
         ? stop
         : Math.floor((index * 100) / colors.length);
 
@@ -77,7 +77,7 @@ const ColorRendered = ({
           style={{
             background: color,
             top: 0,
-            left: `${rightStop}%`
+            left: `${leftStop}%`
           }}
         />
       );
