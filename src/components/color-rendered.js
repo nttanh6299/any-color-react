@@ -1,6 +1,14 @@
 import React, { useMemo, useCallback, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import Button from './button';
 import { offset } from '../utils';
+
+const propTypes = {
+  gradient: PropTypes.object,
+  toggleEditColorOfGradient: PropTypes.func.isRequired,
+  startUpdateColorStop: PropTypes.func.isRequired,
+  updateColorStop: PropTypes.func.isRequired
+};
 
 const ColorRendered = ({
   gradient,
@@ -97,5 +105,7 @@ const ColorRendered = ({
     </div>
   );
 };
+
+ColorRendered.propTypes = propTypes;
 
 export default ColorRendered;
