@@ -1,5 +1,5 @@
 # any-color-react
-### React + Redux + Soundcloud API.
+### React + Redux.
 #### Live demo [here](https://nttanh6299.github.io/any-color-react/#/)
 #### Usage
 1. `npm i`
