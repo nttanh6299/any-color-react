@@ -16,4 +16,4 @@ const Background = ({ color, children }) => {
 
 Background.propTypes = propTypes;
 
-export default Background;
+export default React.memo(Background);

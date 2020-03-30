@@ -11,8 +11,7 @@ const propTypes = {
 const Circle = ({ deg, changeGradientDirection, switchEditAngle }) => {
   const [centerCircleX, setCenterCircleX] = useState(0);
   const [centerCircleY, setCenterCircleY] = useState(0);
-
-  let handleRef = useRef(null);
+  const handleRef = useRef(null);
 
   useEffect(() => {
     const { current } = handleRef;
@@ -58,4 +57,4 @@ const Circle = ({ deg, changeGradientDirection, switchEditAngle }) => {
 
 Circle.propTypes = propTypes;
 
-export default Circle;
+export default React.memo(Circle);

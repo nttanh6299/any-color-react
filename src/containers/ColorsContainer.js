@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../components/colors';
 import {
   onGenerateColor,
@@ -10,16 +10,34 @@ import {
 } from '../actions';
 import { colorsSelector } from '../selectors/ColorsSelectors';
 
-const ColorsContainer = props => <Colors {...props} />;
+const ColorsContainer = () => {
+  const colors = useSelector(colorsSelector);
+  const dispatch = useDispatch();
 
-const mapStateToProps = state => {
-  return { ...colorsSelector(state) };
+  const OnGenerateColor = useCallback(() => dispatch(onGenerateColor()), [
+    dispatch
+  ]);
+  const PrevColor = useCallback(() => dispatch(prevColor()), [dispatch]);
+  const NextColor = useCallback(() => dispatch(nextColor()), [dispatch]);
+  const CopyColorToClipboard = useCallback(
+    () => dispatch(copyColorToClipboard()),
+    [dispatch]
+  );
+  const GenerateColorIfNeeded = useCallback(
+    () => dispatch(generateColorIfNeeded()),
+    [dispatch]
+  );
+
+  return (
+    <Colors
+      {...colors}
+      onGenerateColor={OnGenerateColor}
+      prevColor={PrevColor}
+      nextColor={NextColor}
+      copyColorToClipboard={CopyColorToClipboard}
+      generateColorIfNeeded={GenerateColorIfNeeded}
+    />
+  );
 };
 
-export default connect(mapStateToProps, {
-  onGenerateColor,
-  prevColor,
-  nextColor,
-  copyColorToClipboard,
-  generateColorIfNeeded
-})(ColorsContainer);
+export default ColorsContainer;

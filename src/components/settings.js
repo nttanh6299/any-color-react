@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Icon from './Icon';
 
 const propTypes = {
   prefix: PropTypes.bool.isRequired,
@@ -13,15 +14,15 @@ const Settings = ({ prefix, fallback, togglePrefix, toggleFallback }) => {
     <div className="settings">
       <div onClick={togglePrefix} className="settings__section">
         <span>Prefixes</span>
-        <i className="icon material-icons">
+        <Icon className="icon">
           {prefix ? 'check_box' : 'check_box_outline_blank'}
-        </i>
+        </Icon>
       </div>
       <div onClick={toggleFallback} className="settings__section">
         <span>Fallback</span>
-        <i className="icon material-icons">
+        <Icon className="icon">
           {fallback ? 'check_box' : 'check_box_outline_blank'}
-        </i>
+        </Icon>
       </div>
     </div>
   );
@@ -29,4 +30,4 @@ const Settings = ({ prefix, fallback, togglePrefix, toggleFallback }) => {
 
 Settings.propTypes = propTypes;
 
-export default Settings;
+export default React.memo(Settings);

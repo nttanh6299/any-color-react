@@ -27,4 +27,4 @@ const ColorPicker = ({ color, editColorOfGradient }) => {
 
 ColorPicker.propTypes = propTypes;
 
-export default ColorPicker;
+export default React.memo(ColorPicker);

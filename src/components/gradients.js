@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Background from './background';
 import Button from './button';
@@ -6,8 +6,9 @@ import Circle from './circle';
 import Copy from './copy';
 import Settings from './settings';
 import ColorPicker from './color-picker';
-import { setGradient } from '../utils';
 import ColorRendered from './color-rendered';
+import Icon from './Icon';
+import { setGradient } from '../utils';
 
 const propTypes = {
   gradient: PropTypes.shape({
@@ -62,6 +63,22 @@ const Gradients = ({
     document.title = 'AnyColorReact - Gradients';
   }, []);
 
+  const refreshIcon = useMemo(() => <Icon className="icon">refresh</Icon>, []);
+  const arrowLeftIcon = useMemo(
+    () => <Icon className="icon">arrow_left</Icon>,
+    []
+  );
+  const arrowRightIcon = useMemo(
+    () => <Icon className="icon">arrow_right</Icon>,
+    []
+  );
+  const rotateRightIcon = useMemo(() => <Icon>rotate_right</Icon>, []);
+  const addCircleOutlineIcon = useMemo(
+    () => <Icon>add_circle_outline</Icon>,
+    []
+  );
+  const wrapTextIcon = useMemo(() => <Icon>wrap_text</Icon>);
+
   return (
     <div className="colors">
       <div className="inner">
@@ -89,7 +106,7 @@ const Gradients = ({
           <Button
             onClick={switchEditAngle}
             className={`colors__deg ${editAngle ? 'colors__deg--active' : ''}`}
-            prefix={<i className="material-icons">rotate_right</i>}
+            prefix={rotateRightIcon}
           >
             {gradient && `${gradient.deg}°`}
           </Button>
@@ -103,12 +120,12 @@ const Gradients = ({
           <Button
             onClick={addNewColor}
             style={{ background: 'transparent', marginRight: '6px' }}
-            prefix={<i className="material-icons">add_circle_outline</i>}
+            prefix={addCircleOutlineIcon}
           />
           <Button
             onClick={toggleSlider}
             style={{ background: 'transparent' }}
-            prefix={<i className="material-icons">wrap_text</i>}
+            prefix={wrapTextIcon}
           />
         </div>
         <div className="colors__actions">
@@ -119,21 +136,21 @@ const Gradients = ({
           <Button
             onClick={onGenerateGradient}
             className="colors__action colors__action--generate"
-            prefix={<i className="icon material-icons">refresh</i>}
+            prefix={refreshIcon}
           >
             Generate
           </Button>
           <Button
             onClick={prevGradient}
             className="colors__action"
-            prefix={<i className="icon material-icons">arrow_left</i>}
+            prefix={arrowLeftIcon}
           >
             Back
           </Button>
           <Button
             onClick={nextGradient}
             className="colors__action"
-            suffix={<i className="icon material-icons">arrow_right</i>}
+            suffix={arrowRightIcon}
           >
             Next
           </Button>

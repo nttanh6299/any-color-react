@@ -17,7 +17,7 @@ const ColorRendered = ({
   updateColorStop
 }) => {
   const slider = useRef(null);
-
+  console.log('color rendered');
   useEffect(() => {
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
@@ -47,13 +47,6 @@ const ColorRendered = ({
     window.removeEventListener('mouseup', onMouseUp);
   };
 
-  const onClick = useCallback(
-    index => () => {
-      toggleEditColorOfGradient(index);
-    },
-    []
-  );
-
   const renderColor = useMemo(() => {
     if (!gradient) {
       return null;
@@ -73,7 +66,11 @@ const ColorRendered = ({
           key={index}
           className={`color-rendered__slider__handle ${active}`}
           onMouseDown={onMouseDown(index)}
-          onClick={showSlider ? preventClick : onClick(index)}
+          onClick={
+            showSlider
+              ? preventClick
+              : toggleEditColorOfGradient.bind(this, index)
+          }
           style={{
             background: color,
             top: 0,
@@ -108,4 +105,4 @@ const ColorRendered = ({
 
 ColorRendered.propTypes = propTypes;
 
-export default ColorRendered;
+export default React.memo(ColorRendered);
