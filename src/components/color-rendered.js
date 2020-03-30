@@ -17,7 +17,7 @@ const ColorRendered = ({
   updateColorStop
 }) => {
   const slider = useRef(null);
-  console.log('color rendered');
+
   useEffect(() => {
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
