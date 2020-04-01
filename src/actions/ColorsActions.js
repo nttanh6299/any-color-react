@@ -11,16 +11,16 @@ import {
   getNextColorIndex
 } from '../selectors/ColorsSelectors';
 
-const generateColorRequest = () => ({ type: GENERATE_COLOR_REQUEST });
+export const generateColorRequest = () => ({ type: GENERATE_COLOR_REQUEST });
 
-const generateColorSuccess = color => ({
+export const generateColorSuccess = color => ({
   type: GENERATE_COLOR_SUCCESS,
   color
 });
 
-const changeColorIndex = index => ({ type: CHANGE_COLOR, index });
+export const changeColorIndex = index => ({ type: CHANGE_COLOR, index });
 
-const copyToClipboard = successful => ({
+export const copyToClipboard = successful => ({
   type: COPY_COLOR_TO_CLIPBOARD,
   successful
 });
