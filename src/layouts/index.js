@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import { Route } from 'react-router-dom';
-import Nav from '../components/nav';
 
 const PublicRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route
@@ -15,7 +14,6 @@ const PublicRoute = ({ component: Component, layout: Layout, ...rest }) => (
 
 const PublicLayout = ({ children }) => (
   <>
-    <Nav />
     <Suspense fallback={<div></div>}>
       <main className="container">{children}</main>
     </Suspense>
