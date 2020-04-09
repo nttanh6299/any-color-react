@@ -34,3 +34,16 @@ $tabletWidth: 768px;
     }
   }
 }
+
+@mixin fade-animation($duration: 0.3s, $timingFucntion: linear) {
+  animation: fade $duration $timingFucntion;
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

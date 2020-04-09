@@ -1,5 +1,7 @@
 .colors {
   width: 100%;
+
+  @include fade-animation(0.65s, ease-out);
 }
 
 .colors__value {
