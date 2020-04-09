@@ -135,21 +135,21 @@ const Gradients = ({
           />
           <Button
             onClick={onGenerateGradient}
-            className="colors__action colors__action--generate"
+            className="colors__action colors__action--generate awesome-hover"
             prefix={refreshIcon}
           >
             Generate
           </Button>
           <Button
             onClick={prevGradient}
-            className="colors__action"
+            className="colors__action awesome-hover"
             prefix={arrowLeftIcon}
           >
             Back
           </Button>
           <Button
             onClick={nextGradient}
-            className="colors__action"
+            className="colors__action awesome-hover"
             suffix={arrowRightIcon}
           >
             Next

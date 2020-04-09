@@ -51,21 +51,21 @@ const Colors = ({
         <div className="colors__actions">
           <Button
             onClick={onGenerateColor}
-            className="colors__action colors__action--generate"
+            className="colors__action colors__action--generate awesome-hover"
             prefix={refreshIcon}
           >
             Generate
           </Button>
           <Button
             onClick={prevColor}
-            className="colors__action"
+            className="colors__action awesome-hover"
             prefix={arrowLeftIcon}
           >
             Back
           </Button>
           <Button
             onClick={nextColor}
-            className="colors__action"
+            className="colors__action awesome-hover"
             suffix={arrowRightIcon}
           >
             Next

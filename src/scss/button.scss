@@ -15,3 +15,7 @@
   transform: scale(1.2);
   transition: transform 0.2s;
 }
+
+.awesome-hover {
+  @include awesome-hover(top, 100%);
+}
