@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-//use HashRouter if you want to deploy to github page
 import { Switch } from 'react-router-dom';
 import { PublicRoute } from './layouts';
 import routes from './routes';
@@ -23,9 +22,11 @@ function App() {
     return null;
   }, [routes]);
 
+  const renderNav = useMemo(() => <Nav />, []);
+
   return (
     <>
-      <Nav />
+      {renderNav}
       <Switch>{renderRoutes}</Switch>
     </>
   );
