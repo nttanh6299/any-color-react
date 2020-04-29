@@ -12,7 +12,11 @@ background: -o-linear-gradient(180deg, #FFF, #000);
 */
 
 function setValues(colors) {
-  return colors.map(item => `${item.color} ${item.stop}%`);
+  const copyArr = [].concat(colors);
+
+  return copyArr
+    .sort((left, right) => left.stop - right.stop)
+    .map(item => `${item.color} ${item.stop}%`);
 }
 
 function setAttributeName(colors, attrName) {

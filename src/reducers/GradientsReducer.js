@@ -81,7 +81,10 @@ function gradient(state = initialGradient, action) {
       return {
         ...state,
         showSlider: !state.showSlider,
-        showHub: false
+        showHub: false,
+        colors: [].concat(
+          state.colors.sort((left, right) => left.stop - right.stop)
+        )
       };
     case START_UPDATE_COLOR_STOP:
       return {
