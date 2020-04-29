@@ -8,7 +8,13 @@ $grayLighter: lighten($gray, 20);
 * {
   margin: 0;
   padding: 0;
+}
+
+*,
+*:before,
+*:after {
   box-sizing: border-box;
+  user-select: none;
 }
 
 a {

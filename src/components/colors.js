@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Background from './background';
 import Button from './button';
@@ -29,16 +29,6 @@ const Colors = ({
     document.title = 'AnyColorReact - Colors';
   }, []);
 
-  const refreshIcon = useMemo(() => <Icon className="icon">refresh</Icon>, []);
-  const arrowLeftIcon = useMemo(
-    () => <Icon className="icon">arrow_left</Icon>,
-    []
-  );
-  const arrowRightIcon = useMemo(
-    () => <Icon className="icon">arrow_right</Icon>,
-    []
-  );
-
   return (
     <div className="colors">
       <div className="inner">
@@ -52,23 +42,14 @@ const Colors = ({
           <Button
             onClick={onGenerateColor}
             className="colors__action colors__action--generate awesome-hover"
-            prefix={refreshIcon}
           >
-            Generate
+            <Icon className="icon">refresh</Icon> Generate
           </Button>
-          <Button
-            onClick={prevColor}
-            className="colors__action awesome-hover"
-            prefix={arrowLeftIcon}
-          >
-            Back
+          <Button onClick={prevColor} className="colors__action awesome-hover">
+            <Icon className="icon">arrow_left</Icon> Back
           </Button>
-          <Button
-            onClick={nextColor}
-            className="colors__action awesome-hover"
-            suffix={arrowRightIcon}
-          >
-            Next
+          <Button onClick={nextColor} className="colors__action awesome-hover">
+            Next <Icon className="icon">arrow_right</Icon>
           </Button>
         </div>
       </div>
