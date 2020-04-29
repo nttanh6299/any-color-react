@@ -1,4 +1,8 @@
 .color-picker {
   width: 100%;
+  position: absolute;
+  bottom: 100%;
+  right: 0;
   margin-bottom: 10px;
+  z-index: 100;
 }

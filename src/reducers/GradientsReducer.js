@@ -27,8 +27,9 @@ const initialState = {
 const initialGradient = {
   colors: [],
   deg: 0,
-  colorEditing: { showHub: false, color: '', stop: 0, index: -1 },
-  showSlider: false
+  colorEditing: { color: '', stop: 0, index: -1 },
+  showSlider: false,
+  showHub: false
 };
 
 function gradient(state = initialGradient, action) {
@@ -65,12 +66,10 @@ function gradient(state = initialGradient, action) {
         colorEditing: {
           color: state.colors[action.colorIndex].color,
           stop: state.colors[action.colorIndex].stop,
-          index: action.colorIndex,
-          showHub:
-            state.colorEditing.index !== action.colorIndex
-              ? true
-              : !state.colorEditing.showHub
-        }
+          index: action.colorIndex
+        },
+        showHub:
+          state.colorEditing.index !== action.colorIndex ? true : !state.showHub
       };
     case EDIT_COLOR_OF_GRADIENT:
       return {
@@ -88,7 +87,8 @@ function gradient(state = initialGradient, action) {
     case TOGGLE_SLIDER:
       return {
         ...state,
-        showSlider: !state.showSlider
+        showSlider: !state.showSlider,
+        showHub: false
       };
     case START_UPDATE_COLOR_STOP:
       return {
@@ -118,7 +118,7 @@ function gradient(state = initialGradient, action) {
   }
 }
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GENERATE_GRADIENT_REQUEST:
       return {

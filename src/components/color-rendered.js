@@ -1,29 +1,37 @@
-import React, { useMemo, useCallback, useEffect, useRef } from 'react';
+import React, { useMemo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Button from './button';
+import ColorPicker from './color-picker';
 import { offset, preventClick } from '../utils';
 
 const propTypes = {
   gradient: PropTypes.object,
   toggleEditColorOfGradient: PropTypes.func.isRequired,
   startUpdateColorStop: PropTypes.func.isRequired,
-  updateColorStop: PropTypes.func.isRequired
+  updateColorStop: PropTypes.func.isRequired,
+  editColorOfGradient: PropTypes.func.isRequired
 };
 
 const ColorRendered = ({
   gradient,
   toggleEditColorOfGradient,
   startUpdateColorStop,
-  updateColorStop
+  updateColorStop,
+  editColorOfGradient
 }) => {
   const slider = useRef(null);
 
   useEffect(() => {
+    if (!showSlider) {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+    }
+
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseup', onMouseUp);
     };
-  }, []);
+  }, [showSlider]);
 
   const onMouseDown = index => () => {
     const { showSlider } = gradient;
@@ -48,12 +56,8 @@ const ColorRendered = ({
   };
 
   const renderColor = useMemo(() => {
-    if (!gradient) {
-      return null;
-    }
-
-    const { colors, colorEditing, showSlider } = gradient;
-    const { index: colorIndexEditing, showHub } = colorEditing;
+    const { colors, colorEditing, showSlider, showHub } = gradient;
+    const { index: colorIndexEditing } = colorEditing;
     return colors.map(({ color, stop }, index) => {
       const active =
         colorIndexEditing === index && showHub ? 'button--active' : '';
@@ -62,21 +66,30 @@ const ColorRendered = ({
         : Math.floor((index * 100) / colors.length);
 
       return (
-        <Button
+        <div
+          className="color-rendered__color-wrapper"
           key={index}
-          className={`color-rendered__slider__handle ${active}`}
-          onMouseDown={onMouseDown(index)}
-          onClick={
-            showSlider
-              ? preventClick
-              : toggleEditColorOfGradient.bind(this, index)
-          }
           style={{
-            background: color,
             top: 0,
             left: `${leftStop}%`
           }}
-        />
+        >
+          <Button
+            className={`color-rendered__color ${active}`}
+            style={{ background: color }}
+            onMouseDown={onMouseDown(index)}
+            onClick={
+              showSlider
+                ? preventClick
+                : toggleEditColorOfGradient.bind(this, index)
+            }
+          />
+          <ColorPicker
+            visible={!!active}
+            color={colorEditing}
+            editColorOfGradient={editColorOfGradient}
+          />
+        </div>
       );
     });
   }, [gradient]);
@@ -96,7 +109,7 @@ const ColorRendered = ({
         style={{ width: `${sliderWidth}${unit}` }}
         className="color-rendered__slider"
       >
-        <div style={{ opacity }} className="color-rendered__slider__fill"></div>
+        <div style={{ opacity }} className="color-rendered__fill"></div>
         {renderColor}
       </div>
     </div>
@@ -104,5 +117,6 @@ const ColorRendered = ({
 };
 
 ColorRendered.propTypes = propTypes;
+ColorRendered.defaultProps = { gradient: null };
 
 export default React.memo(ColorRendered);

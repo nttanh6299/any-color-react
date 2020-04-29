@@ -1,11 +1,10 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Background from './background';
 import Button from './button';
 import Circle from './circle';
 import Copy from './copy';
 import Settings from './settings';
-import ColorPicker from './color-picker';
 import ColorRendered from './color-rendered';
 import Icon from './Icon';
 import { setGradient } from '../utils';
@@ -63,21 +62,11 @@ const Gradients = ({
     document.title = 'AnyColorReact - Gradients';
   }, []);
 
-  const refreshIcon = useMemo(() => <Icon className="icon">refresh</Icon>, []);
-  const arrowLeftIcon = useMemo(
-    () => <Icon className="icon">arrow_left</Icon>,
-    []
-  );
-  const arrowRightIcon = useMemo(
-    () => <Icon className="icon">arrow_right</Icon>,
-    []
-  );
-  const rotateRightIcon = useMemo(() => <Icon>rotate_right</Icon>, []);
-  const addCircleOutlineIcon = useMemo(
-    () => <Icon>add_circle_outline</Icon>,
-    []
-  );
-  const wrapTextIcon = useMemo(() => <Icon>wrap_text</Icon>);
+  if (!gradient) {
+    return null;
+  }
+
+  const { deg, showHub, colorEditing } = gradient;
 
   return (
     <div className="colors">
@@ -98,7 +87,7 @@ const Gradients = ({
             <Circle
               changeGradientDirection={changeGradientDirection}
               switchEditAngle={switchEditAngle}
-              deg={gradient.deg}
+              deg={deg}
             />
           )}
         </Background>
@@ -106,9 +95,9 @@ const Gradients = ({
           <Button
             onClick={switchEditAngle}
             className={`colors__deg ${editAngle ? 'colors__deg--active' : ''}`}
-            prefix={rotateRightIcon}
           >
-            {gradient && `${gradient.deg}°`}
+            <Icon>rotate_right</Icon>
+            {`${deg}°`}
           </Button>
           <ColorRendered
             gradient={gradient}
@@ -120,39 +109,31 @@ const Gradients = ({
           <Button
             onClick={addNewColor}
             style={{ background: 'transparent', marginRight: '6px' }}
-            prefix={addCircleOutlineIcon}
-          />
-          <Button
-            onClick={toggleSlider}
-            style={{ background: 'transparent' }}
-            prefix={wrapTextIcon}
-          />
+          >
+            <Icon>add_circle_outline</Icon>
+          </Button>
+          <Button onClick={toggleSlider} style={{ background: 'transparent' }}>
+            <Icon>wrap_text</Icon>
+          </Button>
         </div>
         <div className="colors__actions">
-          <ColorPicker
-            color={gradient && gradient.colorEditing}
-            editColorOfGradient={editColorOfGradient}
-          />
           <Button
             onClick={onGenerateGradient}
             className="colors__action colors__action--generate awesome-hover"
-            prefix={refreshIcon}
           >
-            Generate
+            <Icon className="icon">refresh</Icon> Generate
           </Button>
           <Button
             onClick={prevGradient}
             className="colors__action awesome-hover"
-            prefix={arrowLeftIcon}
           >
-            Back
+            <Icon className="icon">arrow_left</Icon> Back
           </Button>
           <Button
             onClick={nextGradient}
             className="colors__action awesome-hover"
-            suffix={arrowRightIcon}
           >
-            Next
+            Next <Icon className="icon">arrow_right</Icon>
           </Button>
         </div>
       </div>
@@ -161,5 +142,6 @@ const Gradients = ({
 };
 
 Gradients.propTypes = propTypes;
+Gradients.defaultProps = {};
 
 export default Gradients;
