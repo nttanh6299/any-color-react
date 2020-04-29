@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ChromePicker } from 'react-color';
 
 const propTypes = {
-  color: PropTypes.object,
+  color: PropTypes.string.isRequired,
   editColorOfGradient: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired
 };
@@ -11,8 +11,7 @@ const propTypes = {
 const ColorPicker = ({ color, editColorOfGradient, visible }) => {
   const handleChange = colorSelected => {
     const { hex } = colorSelected;
-    const { stop } = color;
-    editColorOfGradient(hex, stop);
+    editColorOfGradient(hex);
   };
 
   if (!visible) {
@@ -21,14 +20,14 @@ const ColorPicker = ({ color, editColorOfGradient, visible }) => {
 
   return (
     <div className="color-picker">
-      <ChromePicker disableAlpha color={color.color} onChange={handleChange} />
+      <ChromePicker disableAlpha color={color} onChange={handleChange} />
     </div>
   );
 };
 
 ColorPicker.propTypes = propTypes;
 ColorPicker.defaultProps = {
-  color: {},
+  color: '#fff',
   visible: false
 };
 

@@ -32,7 +32,8 @@ const propTypes = {
   editColorOfGradient: PropTypes.func.isRequired,
   toggleSlider: PropTypes.func.isRequired,
   startUpdateColorStop: PropTypes.func.isRequired,
-  updateColorStop: PropTypes.func.isRequired
+  updateColorStop: PropTypes.func.isRequired,
+  deleteSelectedColor: PropTypes.func.isRequired
 };
 
 const Gradients = ({
@@ -55,18 +56,19 @@ const Gradients = ({
   editColorOfGradient,
   toggleSlider,
   startUpdateColorStop,
-  updateColorStop
+  updateColorStop,
+  deleteSelectedColor
 }) => {
   useEffect(() => {
     generateGradientIfNeeded();
-    document.title = 'AnyColorReact - Gradients';
   }, []);
 
   if (!gradient) {
     return null;
   }
 
-  const { deg, showHub, colorEditing } = gradient;
+  const { deg, showHub, showSlider, colors } = gradient;
+  const isDeleteColor = showHub && colors.length > 2;
 
   return (
     <div className="colors">
@@ -107,13 +109,20 @@ const Gradients = ({
             updateColorStop={updateColorStop}
           />
           <Button
-            onClick={addNewColor}
+            onClick={!isDeleteColor ? addNewColor : deleteSelectedColor}
             style={{ background: 'transparent', marginRight: '6px' }}
+            title={!isDeleteColor ? 'Add' : 'Delete'}
           >
-            <Icon>add_circle_outline</Icon>
+            <Icon>
+              {!isDeleteColor ? 'add_circle_outline' : 'delete_outline'}
+            </Icon>
           </Button>
-          <Button onClick={toggleSlider} style={{ background: 'transparent' }}>
-            <Icon>wrap_text</Icon>
+          <Button
+            onClick={toggleSlider}
+            style={{ background: 'transparent' }}
+            title={!showSlider ? 'Edit' : 'Exit'}
+          >
+            <Icon>{!showSlider ? 'wrap_text' : 'clear'}</Icon>
           </Button>
         </div>
         <div className="colors__actions">

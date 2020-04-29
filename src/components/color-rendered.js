@@ -56,14 +56,11 @@ const ColorRendered = ({
   };
 
   const renderColor = useMemo(() => {
-    const { colors, colorEditing, showSlider, showHub } = gradient;
-    const { index: colorIndexEditing } = colorEditing;
-    return colors.map(({ color, stop }, index) => {
+    const { colors, colorIndexEditing, showSlider, showHub } = gradient;
+    return colors.map(({ color, stop }, index, { length }) => {
       const active =
         colorIndexEditing === index && showHub ? 'button--active' : '';
-      const leftStop = showSlider
-        ? stop
-        : Math.floor((index * 100) / colors.length);
+      const leftStop = showSlider ? stop : Math.floor((index * 100) / length);
 
       return (
         <div
@@ -71,7 +68,8 @@ const ColorRendered = ({
           key={index}
           style={{
             top: 0,
-            left: `${leftStop}%`
+            left: `${leftStop}%`,
+            zIndex: colorIndexEditing === index ? 2 : 1
           }}
         >
           <Button
@@ -86,7 +84,7 @@ const ColorRendered = ({
           />
           <ColorPicker
             visible={!!active}
-            color={colorEditing}
+            color={color}
             editColorOfGradient={editColorOfGradient}
           />
         </div>

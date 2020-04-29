@@ -1,20 +1,20 @@
 .nav {
   width: 100%;
-
+  height: $navHeight;
+  display: flex;
+  align-items: center;
   @include fade-animation(0.65s, ease-out);
 }
 
 .nav__inner {
   width: 90%;
   margin: 0 auto;
-  padding: 40px 0 30px;
 
   display: flex;
   justify-content: space-between;
 
   @include m-mobile {
     width: 100%;
-    padding: 20px 0 0 0;
     flex-direction: column;
   }
 }

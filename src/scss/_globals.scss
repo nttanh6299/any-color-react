@@ -5,6 +5,8 @@ $grayDark: darken($gray, 5);
 $grayLight: lighten($gray, 10);
 $grayLighter: lighten($gray, 20);
 
+$navHeight: 100px;
+
 * {
   margin: 0;
   padding: 0;
@@ -45,6 +47,7 @@ body {
   color: $dark;
   font-size: 16px;
   font-family: 'Poppins', sans-serif;
+  position: relative;
 }
 
 .icon {
@@ -62,7 +65,30 @@ body {
 .inner {
   width: 100%;
   max-width: 440px;
-  padding: 14px;
   text-align: center;
   margin: 0 auto;
+}
+
+.suspense {
+  height: calc(100vh - #{$navHeight});
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__spinner {
+    background-color: #ff4136;
+    width: 100px;
+    height: 100px;
+    margin-top: -#{$navHeight};
+    animation: spinner 0.9s infinite linear;
+
+    @keyframes spinner {
+      from {
+        transform: rotate(0);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
 }

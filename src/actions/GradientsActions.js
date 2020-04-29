@@ -10,7 +10,8 @@ import {
   EDIT_COLOR_OF_GRADIENT,
   TOGGLE_SLIDER,
   START_UPDATE_COLOR_STOP,
-  UPDATE_COLOR_STOP
+  UPDATE_COLOR_STOP,
+  DELETE_SELECTED_COLOR
 } from '../constants/ActionTypes';
 import { getRandomColor, copyTextToClipboard, setGradient } from '../utils';
 import {
@@ -114,10 +115,9 @@ export const toggleEditColorOfGradient = colorIndex => ({
   colorIndex
 });
 
-export const editColorOfGradient = (color, stop) => ({
+export const editColorOfGradient = color => ({
   type: EDIT_COLOR_OF_GRADIENT,
-  color,
-  stop
+  color
 });
 
 export const toggleSlider = () => ({ type: TOGGLE_SLIDER });
@@ -131,3 +131,5 @@ export const updateColorStop = percent => ({
   type: UPDATE_COLOR_STOP,
   percent
 });
+
+export const deleteSelectedColor = () => ({ type: DELETE_SELECTED_COLOR });

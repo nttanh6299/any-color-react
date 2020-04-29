@@ -15,7 +15,8 @@ import {
   editColorOfGradient,
   toggleSlider,
   startUpdateColorStop,
-  updateColorStop
+  updateColorStop,
+  deleteSelectedColor
 } from '../actions';
 import Gradients from '../components/gradients';
 import { gradientsSelector } from '../selectors/GradientsSelectors';
@@ -68,6 +69,10 @@ const GradientsContainer = () => {
     percent => dispatch(updateColorStop(percent)),
     [dispatch]
   );
+  const DeleteSelectedColor = useCallback(
+    () => dispatch(deleteSelectedColor()),
+    [dispatch]
+  );
 
   return (
     <Gradients
@@ -88,6 +93,7 @@ const GradientsContainer = () => {
       toggleSlider={ToggleSlider}
       startUpdateColorStop={StartUpdateColorStop}
       updateColorStop={UpdateColorStop}
+      deleteSelectedColor={DeleteSelectedColor}
     />
   );
 };

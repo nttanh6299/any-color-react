@@ -14,7 +14,13 @@ const PublicRoute = ({ component: Component, layout: Layout, ...rest }) => (
 
 const PublicLayout = ({ children }) => (
   <>
-    <Suspense fallback={<div></div>}>
+    <Suspense
+      fallback={
+        <div className="suspense">
+          <span className="suspense__spinner"></span>
+        </div>
+      }
+    >
       <main className="container">{children}</main>
     </Suspense>
   </>

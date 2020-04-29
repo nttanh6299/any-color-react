@@ -12,7 +12,8 @@ import {
   START_UPDATE_COLOR_STOP,
   UPDATE_COLOR_STOP,
   TOGGLE_PREFIX,
-  TOGGLE_FALLBACK
+  TOGGLE_FALLBACK,
+  DELETE_SELECTED_COLOR
 } from '../constants/ActionTypes';
 import { calculateStop } from '../utils';
 
@@ -27,7 +28,7 @@ const initialState = {
 const initialGradient = {
   colors: [],
   deg: 0,
-  colorEditing: { color: '', stop: 0, index: -1 },
+  colorIndexEditing: -1,
   showSlider: false,
   showHub: false
 };
@@ -63,23 +64,15 @@ function gradient(state = initialGradient, action) {
     case TOGGLE_EDIT_COLOR_OF_GRADIENT:
       return {
         ...state,
-        colorEditing: {
-          color: state.colors[action.colorIndex].color,
-          stop: state.colors[action.colorIndex].stop,
-          index: action.colorIndex
-        },
+        colorIndexEditing: action.colorIndex,
         showHub:
-          state.colorEditing.index !== action.colorIndex ? true : !state.showHub
+          state.colorIndexEditing !== action.colorIndex ? true : !state.showHub
       };
     case EDIT_COLOR_OF_GRADIENT:
       return {
         ...state,
-        colorEditing: {
-          ...state.colorEditing,
-          color: action.color
-        },
         colors: state.colors.map((color, index) => {
-          return index === state.colorEditing.index
+          return index === state.colorIndexEditing
             ? { ...color, color: action.color }
             : color;
         })
@@ -93,25 +86,26 @@ function gradient(state = initialGradient, action) {
     case START_UPDATE_COLOR_STOP:
       return {
         ...state,
-        colorEditing: {
-          ...state.colorEditing,
-          color: state.colors[action.colorIndex].color,
-          stop: state.colors[action.colorIndex].stop,
-          index: action.colorIndex
-        }
+        colorIndexEditing: action.colorIndex
       };
     case UPDATE_COLOR_STOP:
       return {
         ...state,
-        colorEditing: {
-          ...state.colorEditing,
-          stop: action.stop
-        },
         colors: state.colors.map((color, index) => {
-          return index === state.colorEditing.index
+          return index === state.colorIndexEditing
             ? { ...color, stop: action.percent }
             : color;
         })
+      };
+    case DELETE_SELECTED_COLOR:
+      return {
+        ...state,
+        colors: [
+          ...state.colors.filter(
+            (_, index) => index !== state.colorIndexEditing
+          )
+        ],
+        colorIndexEditing: -1
       };
     default:
       return state;
@@ -154,6 +148,7 @@ export default function (state = initialState, action) {
     case TOGGLE_EDIT_COLOR_OF_GRADIENT:
     case CHANGE_GRADIENT_DIRECTION:
     case TOGGLE_SLIDER:
+    case DELETE_SELECTED_COLOR:
       return {
         ...state,
         isCopied: false,
