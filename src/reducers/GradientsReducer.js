@@ -54,7 +54,8 @@ function gradient(state = initialGradient, action) {
           .map((color, index, colors) => ({
             ...color,
             stop: calculateStop(100, colors.length, index)
-          }))
+          })),
+        showHub: false
       };
     case CHANGE_GRADIENT_DIRECTION:
       return {
@@ -108,7 +109,8 @@ function gradient(state = initialGradient, action) {
             (_, index) => index !== state.colorIndexEditing
           )
         ],
-        colorIndexEditing: -1
+        colorIndexEditing: -1,
+        showHub: false
       };
     default:
       return state;

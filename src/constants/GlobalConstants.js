@@ -12,3 +12,5 @@ export const HEADER_LINKS = [
     exact: true
   }
 ];
+
+export const LOCALSTORAGE_KEY = 'config';

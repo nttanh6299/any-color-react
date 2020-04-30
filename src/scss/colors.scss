@@ -1,6 +1,6 @@
 .colors {
   width: 100%;
-
+  overflow: hidden;
   @include fade-animation(0.65s, ease-out);
 }
 
