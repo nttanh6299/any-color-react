@@ -75,6 +75,7 @@ const ColorRendered = ({
           <Button
             className={`color-rendered__color ${active}`}
             style={{ background: color }}
+            title={color}
             onMouseDown={onMouseDown(index)}
             onClick={
               showSlider
